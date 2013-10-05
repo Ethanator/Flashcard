@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--Collection View Controller - Decks-->
+        <!--Deck Collection View Controller - Decks-->
         <scene sceneID="V1I-Y6-wLa">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="qaf-D6-BK0" sceneMemberID="viewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="qaf-D6-BK0" customClass="FCDeckCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="ZQg-qF-S3X">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="308" y="169"/>
         </scene>
-        <!--View Controller-->
+        <!--Render View Controller-->
         <scene sceneID="EX5-Hn-EBE">
             <objects>
-                <viewController id="WCP-Pw-HjI" sceneMemberID="viewController">
+                <viewController id="WCP-Pw-HjI" customClass="FCRenderViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="686-97-27c"/>
                         <viewControllerLayoutGuide type="bottom" id="8fk-m1-xyS"/>
@@ -78,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="1122" y="169"/>
         </scene>
-        <!--Collection View Controller - Title-->
+        <!--Card Collection View Controller - Title-->
         <scene sceneID="gUQ-dU-HZJ">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="fa4-8N-pSn" sceneMemberID="viewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="fa4-8N-pSn" customClass="FCCardCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="1K4-dv-qBR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
