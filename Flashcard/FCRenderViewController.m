@@ -9,7 +9,6 @@
 #import "FCRenderViewController.h"
 
 @interface FCRenderViewController () <UIWebViewDelegate>
-@property (strong, nonatomic) NSURL *resourceURL;
 @property (weak, nonatomic) IBOutlet UIWebView *renderWebView;
 @property (strong, nonatomic) NSManagedObjectContext *databaseContext;
 @end
@@ -30,6 +29,9 @@
     [super viewDidLoad];
     
     self.renderWebView.delegate = self;
+    NSString *testString = @"http://www.google.com";
+    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [self loadURLToWebView];
 	// Do any additional setup after loading the view.
 }
 
