@@ -12,8 +12,10 @@
 #import "Card.h"
 #import "Constants.h"
 
-@interface FCCardCollectionViewController ()
+@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate>
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+- (void)renderText;
 
 @end
 
@@ -102,5 +104,59 @@
 	
 }
 
+- (IBAction)addCard:(id)sender {
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:ACTION_SHEET_TITLE delegate:self cancelButtonTitle:CANCEL_BUTTON_TITLE destructiveButtonTitle:DESTRUCTIVE_BUTTON_TITLE otherButtonTitles:OTHER_BUTTON_TITLES];
+	
+	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+	[actionSheet showInView:self.view];
+}
+
+- (IBAction)cameraButtonTapped:(id)sender
+{
+	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	else
+	{
+		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
+									message:nil
+								   delegate:self
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+		return;
+	}
+	picker.delegate = self;
+	[self presentViewController:picker animated:YES completion:nil];
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	// as in <UIActionSheetDelegate>
+	// push only for url
+	// method for text
+	// UIImagePickerController for camera
+	
+	switch (buttonIndex) {
+		case 0:
+			// text case
+//			renderText();	// TO BE IMPLEMENTED
+			break;
+			
+		case 1:
+			// web case
+			break;
+			
+		case 2:
+			// image case
+			break;
+			
+		default:
+			break;
+	}
+	
+}
+
+- (void)renderText {
+	
+}
 
 @end

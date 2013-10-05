@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSArray *decks;
 @property (strong, nonatomic) Deck *selectedDeck;
+@property (strong, nonatomic) NSManagedObjectContext *databaseContext;
 
 @end
 
@@ -47,7 +48,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 	return 1;
@@ -84,6 +84,9 @@
     }
     [super prepareForSegue:segue sender:sender];
 }
+
+#pragma mark -
+#pragma mark Core Data Methods
 
 - (void)pullCoreData {
 	
@@ -146,7 +149,7 @@
 
 -(void)documentIsReady:(UIManagedDocument *)databaseDocument
 {
-	NSManagedObjectContext * databaseContext = databaseDocument.managedObjectContext;
+	self.databaseContext = databaseDocument.managedObjectContext;
 	
 	NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:DECK_ENTITY_NAME];
 	// fetch the decks, store them to array
@@ -167,9 +170,10 @@
         deck2.name = @"Sean"; deck2.index = [NSNumber numberWithInt:1];
         deck3.name = @"Shuyang"; deck3.index = [NSNumber numberWithInt:2];
         
-        self.decks = @[deck1, deck2, deck3];*/
+        self.decks = @[deck1, deck2, deck3];
     }
-	[self.collectionView reloadData];}
+	[self.collectionView reloadData];
+}
 
 -(void)firstTimeDeckInsert
 {
