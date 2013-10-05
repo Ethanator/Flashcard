@@ -138,7 +138,7 @@
 	switch (buttonIndex) {
 		case 0:
 			// text case
-			renderText();	// TO BE IMPLEMENTED
+//			renderText();	// TO BE IMPLEMENTED
 			break;
 			
 		case 1:
