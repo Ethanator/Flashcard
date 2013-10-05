@@ -30,6 +30,7 @@
 		2C99EEFC17FFF141001149CB /* UIImage+cameraOrientationFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484BE17FFF0B400F13C12 /* UIImage+cameraOrientationFix.m */; };
 		2C99EEFE18002439001149CB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C99EEFD18002439001149CB /* rect.png */; };
 		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
+		3F7AEFBA18004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB918004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
 		8899CE8218002D080034D788 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8899CE8118002D080034D788 /* CoreText.framework */; };
@@ -82,6 +83,8 @@
 		2C99EEFD18002439001149CB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = ../rect.png; sourceTree = "<group>"; };
 		3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
 		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
+		3F7AEFB818004E44002D6D9A /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		3F7AEFB918004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
 		8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCardCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE8118002D080034D788 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -203,6 +206,8 @@
 				2C5484B817FFD7BC00F13C12 /* Deck.m */,
 				2C5484BA17FFD7BC00F13C12 /* Card.h */,
 				2C5484BB17FFD7BC00F13C12 /* Card.m */,
+				3F7AEFB818004E44002D6D9A /* LXReorderableCollectionViewFlowLayout.h */,
+				3F7AEFB918004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */,
 				2C54846517FFA0BE00F13C12 /* main.m in Sources */,
 				2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */,
+				3F7AEFBA18004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */,
 				2C54849517FFA95D00F13C12 /* FCRenderViewController.m in Sources */,
 				8899CE7117FFB4550034D788 /* (null) in Sources */,
