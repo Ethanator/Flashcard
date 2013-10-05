@@ -21,6 +21,9 @@
 #define OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE @"Please choose a flashcard deck for your card."
 #define OK_BUTTON_TITLE @"OK"
 #define CARD_TO_RENDER_SEGUE_IDENTIFIER @"ShowRenderViewController"
+#define CROP_RECT_WIDTH (170)
+#define CROP_RECT_HEIGHT (150)
+#define RECT_IMAGE_NAME @"rect.png"
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
