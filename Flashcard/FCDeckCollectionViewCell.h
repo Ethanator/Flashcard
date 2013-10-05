@@ -11,5 +11,7 @@
 @interface FCDeckCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *deckName;
+@property (weak, nonatomic) IBOutlet UIImageView *deckImageView;
+
 
 @end
