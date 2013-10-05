@@ -22,7 +22,7 @@
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
 
 // below are titles for buttons for adding a new card
-#define ACTION_SHEET_TITLE @"Add Card"
+#define ACTION_SHEET_TITLE nil
 #define CANCEL_BUTTON_TITLE @"Cancel"
 #define DESTRUCTIVE_BUTTON_TITLE nil
 #define OTHER_BUTTON_TITLES @"Text", @"Web", @"Camera", nil
