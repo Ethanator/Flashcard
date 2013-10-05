@@ -24,6 +24,7 @@
 
 // methods to handle different types of inputs
 - (void)renderText;
+- (void)promptURL;
 - (void)cameraButtonTapped:(id)sender;
 
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
@@ -200,9 +201,6 @@
 // code from UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// as in <UIActionSheetDelegate>
-	// push only for url
-	// method for text
-	// UIImagePickerController for camera
 	
 	switch (buttonIndex) {
 		case 0:
@@ -212,7 +210,7 @@
 			
 		case 1:
 			// web case
-			
+			[self promptURL];
 			break;
 			
 		case 2:
@@ -245,7 +243,6 @@
 }
 
 // method to handle text case
-// might want to change the size of the image since it's way too big
 - (void)renderText {
 	UIAlertView *promptForTextView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_TEXT_TITLE
 																message:PROMPT_FOR_TEXT_MESSAGE
@@ -256,8 +253,19 @@
 	[promptForTextView show];
 }
 
+// method to handle web case
+- (void)promptURL {
+	UIAlertView *promptForURLView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_URL_TITLE
+																message:PROMPT_FOR_URL_MESSAGE
+															   delegate:self
+													  cancelButtonTitle:PROMPT_FOR_URL_CANCEL_BUTTON_TITLE
+													  otherButtonTitles:PROMPT_FOR_URL_OTHER_BUTTON_TITLES];
+	promptForURLView.alertViewStyle = UIAlertViewStylePlainTextInput;
+	[promptForURLView show];
+}
+
 // method to handle UIAlertView action, from UIAlertViewDelegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
 	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_TITLE]) {
 		
@@ -306,6 +314,15 @@
 			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 		}
 		
+	} else if ([alertView.title isEqualToString:PROMPT_FOR_URL_TITLE]) {
+		if (buttonIndex == 0) {
+			NSLog(@"User Canceled with the cancel button.");
+			return;
+		} else if (buttonIndex == 1) {
+			NSString *fileURL = [alertView textFieldAtIndex:0].text;
+			self.resourceURL = [NSURL fileURLWithPath:fileURL];
+			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
+		}
 	}
 }
 
@@ -318,7 +335,6 @@
 	card.backImagePath = back;
 	card.frontUp = [NSNumber numberWithBool:FALSE];
 	
-	[self.deck addCardsObject:card];
 	
 	// View
 	
