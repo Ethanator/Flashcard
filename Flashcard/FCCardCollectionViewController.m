@@ -193,6 +193,8 @@
 															   delegate:self
 													  cancelButtonTitle:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE
 													  otherButtonTitles:PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES];
+	promptForTextView.alertViewStyle = UIAlertViewStylePlainTextInput;
+	
 }
 
 
