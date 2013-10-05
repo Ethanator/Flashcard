@@ -256,58 +256,50 @@
 
 
 // method to handle UIAlertView action
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	
-	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE]) {
+-(void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_TITLE]) {
 		
-		switch (buttonIndex) {
-			case 0:
-				// "cancel"
-				break;
-				
-			case 1:
-				// "done"
-				
-				NSString * string = [[alertView textFieldAtIndex:0] text];
-				
-				NSString *stringToRender = [alertView textFieldAtIndex:0].text;
-						
-				UIFont *font = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
-				CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
-				
-				UIGraphicsBeginImageContext(size);
-				
-				[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
-				
-				UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-				NSData *imageData = UIImagePNGRepresentation(image);
-				
-				NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-				
-				[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-				
-				[[NSUserDefaults standardUserDefaults] synchronize];
-				
-				NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-				NSString *documentsDirectory = [paths objectAtIndex:0];
-				
-				NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",cardUniqueIDCounter]];
-				
-				if (![imageData writeToFile:imagePath atomically:NO]) {
-					NSLog((@"Failed to cache image data to disk"));
-				} else {
-					NSLog(@"the cachedImagedPath is %@",imagePath);
-				}
-				
-				self.resourceURL = [NSURL fileURLWithPath:imagePath];
-				
-				[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
-				
-				break;
-				
-			default:
-				break;
+		if (buttonIndex == 0)
+		{
+			NSLog(@"User Canceled with the cancel button.");
+			return;
+		} else if (buttonIndex == 1)
+		{
+			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
+			UIFont *font = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
+			CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
+			
+			UIGraphicsBeginImageContext(size);
+			
+			[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
+			
+			UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+			NSData *imageData = UIImagePNGRepresentation(image);
+			
+			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+			
+			[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+			
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
+			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+			NSString *documentsDirectory = [paths objectAtIndex:0];
+			
+			NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",cardUniqueIDCounter]];
+			
+			if (![imageData writeToFile:imagePath atomically:NO]) {
+				NSLog((@"Failed to cache image data to disk"));
+			} else {
+				NSLog(@"the cachedImagedPath is %@",imagePath);
+			}
+			
+			self.resourceURL = [NSURL fileURLWithPath:imagePath];
+			
+			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 		}
+		
 	}
 }
 
