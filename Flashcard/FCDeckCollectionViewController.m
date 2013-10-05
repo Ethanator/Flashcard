@@ -10,6 +10,7 @@
 #import "FCDeckCollectionViewCell.h"
 #import "FCCardCollectionViewController.h"
 #import "Deck.h"
+#import "Card.h"
 #import <CoreData/CoreData.h>
 
 @interface FCDeckCollectionViewController ()
@@ -65,7 +66,8 @@
 		NSInteger deckIndex = indexPath.row;
 		Deck* deck = self.decks[deckIndex];
 		cell.deckName.text = deck.name;
-		}
+        cell.deckImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:((Card *)[deck.cards anyObject]).frontImagePath]];
+    }
 	return cell;
 }
 
