@@ -11,6 +11,7 @@
 #import "Deck.h"
 #import "Card.h"
 #import "UIImage+cameraOrientationFix.h"
+#import "FCRenderViewController.h"
 #import "Constants.h"
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -53,8 +54,17 @@
 	{
 		self.resourceURL = [[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
-		[self performSegueWithIdentifier:@"" sender:self];
+		[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 	}
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:CARD_TO_RENDER_SEGUE_IDENTIFIER])
+	{
+		FCRenderViewController* renderVC = segue.destinationViewController;
+	}
+	[super prepareForSegue:segue sender:sender];
 }
 
 - (void)didReceiveMemoryWarning
