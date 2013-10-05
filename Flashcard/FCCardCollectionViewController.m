@@ -26,6 +26,7 @@
 - (void)renderText;
 - (void)promptURL;
 - (void)cameraButtonTapped:(id)sender;
+- (void)getImageFromPhotos;
 
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
@@ -227,8 +228,13 @@
 			break;
 			
 		case 2:
-			// image case
+			// camera case
 			[self cameraButtonTapped:self];
+			break;
+			
+		case 3:
+			// photos case
+			[self getImageFromPhotos];
 			break;
 			
 		default:
