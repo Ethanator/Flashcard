@@ -192,9 +192,6 @@
 	
 	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 	
-	
-	// push imageData to RenderViewController
-	
 //	[self.collectionView reloadData];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -284,11 +281,37 @@
 						[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
 						
 						UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-						NSData *data = UIImagePNGRepresentation(image);
+						NSData *imageData = UIImagePNGRepresentation(image);
+						
+						NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+						
+						[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+						
+						[[NSUserDefaults standardUserDefaults] synchronize];
+						
+						NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+						NSString *documentsDirectory = [paths objectAtIndex:0];
+						
+						NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",cardUniqueIDCounter]];
+						
+						if (![imageData writeToFile:imagePath atomically:NO])
+						{
+							NSLog((@"Failed to cache image data to disk"));
+						}
+						else
+						{
+							NSLog(@"the cachedImagedPath is %@",imagePath);
+						}
+						
+						self.resourceURL = [NSURL fileURLWithPath:imagePath];
+						
+						
+						[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
+						
+						return;
 					}
 				}
 				
-				// TO-DO: send image to render
 				
 				
 			default:
