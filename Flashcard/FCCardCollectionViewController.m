@@ -312,6 +312,20 @@
 	[promptForURLView show];
 }
 
+-(void) getImageFromPhotos
+{
+	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+	cameraUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+	
+	// Hides the controls for moving & scaling pictures, or for
+	// trimming movies. To instead show the controls, use YES.
+	cameraUI.allowsEditing = NO;
+	
+	cameraUI.delegate = self;
+	
+	[self presentViewController:cameraUI animated:YES completion:nil];
+}
+
 // method to handle UIAlertView action, from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
