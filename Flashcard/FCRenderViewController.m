@@ -9,7 +9,8 @@
 #import "FCRenderViewController.h"
 
 @interface FCRenderViewController ()
-
+@property (strong, nonatomic) NSString *resourceURL;
+@property (weak, nonatomic) IBOutlet UIWebView *renderWebView;
 @end
 
 @implementation FCRenderViewController

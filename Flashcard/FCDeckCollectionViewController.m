@@ -10,6 +10,7 @@
 #import "FCDeckCollectionViewCell.h"
 #import "FCCardCollectionViewController.h"
 #import "Deck.h"
+#import "Card.h"
 #import <CoreData/CoreData.h>
 
 @interface FCDeckCollectionViewController ()
@@ -33,19 +34,18 @@
 
 - (void)viewDidLoad
 {
-	
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
 	//pull card decks from core data database
 	/***** REMEMBER THIS IS NOT PERFORMED IN THE MAIN THREAD. DON'T EXPECT THERE TO BE ANY DECKS READY AFTER THIS METHOD *****/
 	//also, this method draws a UIActivityIndicator on top of the view. It also gets rid of it afterward.
 	[self pullCoreData];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
-	{
-		[self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
-	}
-	
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	[super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,7 +70,8 @@
 		NSInteger deckIndex = indexPath.row;
 		Deck* deck = self.decks[deckIndex];
 		cell.deckName.text = deck.name;
-		}
+        cell.deckImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:((Card *)[deck.cards anyObject]).frontImagePath]];
+    }
 	return cell;
 }
 
@@ -177,7 +178,21 @@
                         inManagedObjectContext:self.databaseContext];
         self.decks = @[deck1, deck2, deck3];
     }
+	
+	
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
+	 {
+		 
+		 [[[UIAlertView alloc] initWithTitle:OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE
+																 message:nil delegate:nil
+											 cancelButtonTitle:OK_BUTTON_TITLE
+											 otherButtonTitles: nil] show];
+		 
+		 [self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
+	 }
+	
 	[self.collectionView reloadData];
+    
 }
 
 -(void)firstTimeDeckInsert
