@@ -195,16 +195,12 @@
 		2C5484A017FFB23F00F13C12 /* View Controller Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */,
-				8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */,
 				2C54849317FFA95D00F13C12 /* FCRenderViewController.h */,
 				2C54849417FFA95D00F13C12 /* FCRenderViewController.m */,
 				2C54849017FFA92B00F13C12 /* FCCardCollectionViewController.h */,
 				2C54849117FFA92B00F13C12 /* FCCardCollectionViewController.m */,
 				2C54848D17FFA77900F13C12 /* FCDeckCollectionViewController.h */,
 				2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */,
-				3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */,
-				3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */,
 			);
 			name = "View Controller Subclasses";
 			sourceTree = "<group>";
@@ -212,6 +208,10 @@
 		2C5484A217FFBC0700F13C12 /* Other View Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */,
+				8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */,
+				3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */,
+				3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */,
 			);
 			name = "Other View Subclasses";
 			sourceTree = "<group>";
