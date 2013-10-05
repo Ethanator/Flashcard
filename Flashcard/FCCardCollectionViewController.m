@@ -11,16 +11,19 @@
 #import "Deck.h"
 #import "Card.h"
 #import "UIImage+cameraOrientationFix.h"
+#import "FCCaptureImageViewController.h"
 #import "FCRenderViewController.h"
 #import "Constants.h"
 #import <CoreText/CoreText.h>
 
 
-@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
+@interface FCCardCollectionViewController () <FCCaptureImageViewControllerDelegate,UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
 @property (nonatomic, strong) NSURL *resourceURL;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+
+@property BOOL imageJustCaptured;
 
 // methods to handle different types of inputs
 - (void)renderText;
@@ -69,6 +72,10 @@
 {
 	[super viewDidAppear:animated];
 	
+	if (self.imageJustCaptured) {
+		self.imageJustCaptured = NO;
+		[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
+	}
 	
 	[self appIntoForeground];
 }
@@ -86,8 +93,37 @@
 		FCRenderViewController* renderVC = segue.destinationViewController;
 		renderVC.delegate = self;
 		renderVC.resourceURL = self.resourceURL;
+	} else if([segue.identifier isEqualToString:SHOW_CAMERA_SEGUE])
+	{
+		FCCaptureImageViewController* renderVC = segue.destinationViewController;
+		renderVC.delegate = self;
 	}
 	[super prepareForSegue:segue sender:sender];
+}
+
+-(void)captureImageViewControllerDidCaptureImage:(UIImage *)image
+{
+	NSData *imageData = UIImagePNGRepresentation(image);
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"tempImage.png"]];
+	
+	NSLog((@"pre writing to file"));
+	if (![imageData writeToFile:imagePath atomically:NO])
+	{
+		NSLog((@"Failed to cache image data to disk"));
+	}
+	else
+	{
+		NSLog(@"the cachedImagedPath is %@",imagePath);
+	}
+	
+	self.resourceURL = [NSURL fileURLWithPath:imagePath];
+	
+	self.imageJustCaptured = YES;
+		
 }
 
 - (void)didReceiveMemoryWarning
@@ -235,7 +271,10 @@
 			
 		case 2:
 			// camera case
-			[self cameraButtonTapped:self];
+#warning Custom Camera Protocol
+			[self performSegueWithIdentifier:SHOW_CAMERA_SEGUE sender:self];
+			
+//			[self cameraButtonTapped:self];
 			break;
 			
 		case 3:

@@ -76,7 +76,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UcU-45-co1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="302" y="169"/>
+            <point key="canvasLocation" x="381" y="169"/>
         </scene>
         <!--Render View Controller-->
         <scene sceneID="EX5-Hn-EBE">
@@ -203,11 +203,63 @@
                     </navigationItem>
                     <connections>
                         <segue destination="WCP-Pw-HjI" kind="push" identifier="ShowRenderViewController" id="rxT-4M-FZV"/>
+                        <segue destination="AZO-zf-wGg" kind="modal" identifier="ShowCameraSegue" id="qrA-I2-Tsm"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ui-H6-vmv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="169"/>
+            <point key="canvasLocation" x="867" y="169"/>
+        </scene>
+        <!--Capture Image View Controller-->
+        <scene sceneID="nGU-22-WAG">
+            <objects>
+                <viewController id="AZO-zf-wGg" customClass="FCCaptureImageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BEZ-9S-h1T"/>
+                        <viewControllerLayoutGuide type="bottom" id="vj6-mA-tfs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B6X-e3-193">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCz-Ji-GkW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0x-GC-RSg">
+                                <rect key="frame" x="215" y="420" width="85" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Capture">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="captureButtonTapped:" destination="AZO-zf-wGg" eventType="touchUpInside" id="JUQ-a4-lgV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekc-iA-dnK">
+                                <rect key="frame" x="20" y="420" width="74" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="AZO-zf-wGg" eventType="touchUpInside" id="t4x-2t-OVc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iw7-YB-7Tx"/>
+                    <connections>
+                        <outlet property="videoPreviewLayer" destination="cCz-Ji-GkW" id="52E-bk-sJd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xRY-H2-Euf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1399" y="767"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PIs-MC-sgX">

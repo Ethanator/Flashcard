@@ -24,6 +24,7 @@
 #define CROP_RECT_WIDTH (170)
 #define CROP_RECT_HEIGHT (150)
 #define RECT_IMAGE_NAME @"rect.png"
+#define SHOW_CAMERA_SEGUE @"ShowCameraSegue"
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
