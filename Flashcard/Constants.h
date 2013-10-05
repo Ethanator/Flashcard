@@ -23,10 +23,16 @@
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
 
 // below are titles for buttons for adding a new card
-#define ACTION_SHEET_TITLE nil
-#define CANCEL_BUTTON_TITLE @"Cancel"
-#define DESTRUCTIVE_BUTTON_TITLE nil
-#define OTHER_BUTTON_TITLES @"Text", @"Web", @"Camera", nil
+#define ADD_CARD_ACTION_SHEET_TITLE nil
+#define ADD_CARD_CANCEL_BUTTON_TITLE @"Cancel"
+#define ADD_CARD_DESTRUCTIVE_BUTTON_TITLE nil
+#define ADD_CARD_OTHER_BUTTON_TITLES @"Text", @"Web", @"Camera", nil
+
+// below are titles for buttons for prompting for text input
+#define PROMPT_FOR_TEXT_TITLE @"Text Input"
+#define PROMPT_FOR_TEXT_MESSAGE @"Please type in the text on the flashcard:"
+#define PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE @"Cancel"
+#define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES nil
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
