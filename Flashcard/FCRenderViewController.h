@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FCCardCollectionViewCell.h"
-
 
 @protocol FCRenderViewControllerDelegate
 -(void) didCollectFront:(NSString *)front andDidCollectBack:(NSString *)back;

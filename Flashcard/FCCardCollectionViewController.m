@@ -14,7 +14,7 @@
 #import "FCRenderViewController.h"
 #import "Constants.h"
 
-@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
 @property (nonatomic, strong) NSURL *resourceURL;
 
@@ -49,6 +49,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
 -(void)appIntoForeground
 {
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
@@ -70,6 +71,8 @@
 	if ([segue.identifier isEqualToString:CARD_TO_RENDER_SEGUE_IDENTIFIER])
 	{
 		FCRenderViewController* renderVC = segue.destinationViewController;
+		renderVC.delegate = self;
+		renderVC.resourceURL = self.resourceURL;
 	}
 	[super prepareForSegue:segue sender:sender];
 }
@@ -159,35 +162,44 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
-	[capturedimage fixOrientation];
-	
-	NSData *imageData = UIImagePNGRepresentation(capturedimage);
-	
+	capturedimage = [capturedimage fixOrientation];
+		
 	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	if (cardUniqueIDCounter) {
-		cardUniqueIDCounter++;
-	} else {
-		cardUniqueIDCounter = 0;
-	}
 	
 	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 	
-	self.resourceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%d.png", cardUniqueIDCounter]];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+		
+	NSData *imageData = UIImagePNGRepresentation(capturedimage);
 	
-	[imageData writeToURL:self.resourceURL atomically:YES];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",cardUniqueIDCounter]];
 
+	//	NSLog((@"pre writing to file"));
+	if (![imageData writeToFile:imagePath atomically:NO])
+	{
+		NSLog((@"Failed to cache image data to disk"));
+	}
+	else
+	{
+		NSLog(@"the cachedImagedPath is %@",imagePath);
+	}
+	
+	self.resourceURL = [NSURL fileURLWithPath:imagePath];
+
+	
 	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 	
 	
 	// push imageData to RenderViewController
 	
-	[self.collectionView reloadData];
+//	[self.collectionView reloadData];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // code above from UIImagePickerControllerDelegate
-
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// as in <UIActionSheetDelegate>
 	// push only for url
