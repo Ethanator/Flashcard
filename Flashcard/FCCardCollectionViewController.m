@@ -35,6 +35,11 @@
 
 @implementation FCCardCollectionViewController
 
+- (NSManagedObjectContext *)managedObjectContext {
+	if (!_managedObjectContext) _managedObjectContext = self.deck.managedObjectContext;
+	return _managedObjectContext;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -86,6 +91,7 @@
 		FCRenderViewController* renderVC = segue.destinationViewController;
 		renderVC.delegate = self;
 		renderVC.resourceURL = self.resourceURL;
+		renderVC.managedObjectContext = self.managedObjectContext;
 	}
 	[super prepareForSegue:segue sender:sender];
 }
@@ -127,6 +133,7 @@
 		} else {
 			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.backImagePath];
 		}
+		
 	}
 	
 	// appearance
@@ -167,8 +174,11 @@
 					animations:^{
 						if ([cardToBeChanged.frontUp boolValue]) {
 							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+							NSLog(@"Front image path:%@", cardToBeChanged.frontImagePath);
 						} else {
 							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+							
+							NSLog(@"Back image path:%@", cardToBeChanged.backImagePath);
 						}
 					} completion:NULL];
 	
@@ -388,15 +398,20 @@
 // required method from FCRenderViewControllerDelegate
 - (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
-	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.deck.managedObjectContext];
+	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
 	card.frontImagePath = front;
 	card.backImagePath = back;
 	card.frontUp = [NSNumber numberWithBool:FALSE];
 	card.deck = self.deck;
-	card.index = [NSNumber numberWithInt:[self.deck.cards count] + 1];
+	card.index = [NSNumber numberWithInt:[self.deck.cards count] - 1];
+	
+	NSLog(@"front: %@\n", card.frontImagePath);
+	NSLog(@"back: %@\n", card.backImagePath);
+	NSLog(@"deck: %@\n", card.deck.name);
+	NSLog(@"index: %@", card.index);
 	
 	NSError *error;
-	if (![self.deck.managedObjectContext save:&error]) {
+	if (![self.managedObjectContext save:&error]) {
 		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
 	
