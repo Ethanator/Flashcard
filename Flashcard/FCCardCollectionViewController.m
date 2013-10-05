@@ -14,7 +14,6 @@
 #import "FCRenderViewController.h"
 #import "Constants.h"
 #import <CoreText/CoreText.h>
-#import <CoreData/CoreData.h>
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
@@ -417,6 +416,14 @@
 	
 	[self.collectionView reloadData];
 
+}
+
+// methods to set the appearance
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+						layout:(UICollectionViewLayout*)collectionViewLayout
+		insetForSectionAtIndex:(NSInteger)section
+{
+	return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
