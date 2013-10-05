@@ -219,12 +219,17 @@
 }
 
 - (IBAction)addNewDeck:(id)sender {
-    Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
-                                                  inManagedObjectContext:self.databaseContext];
-	newDeck.name = @"New Deck";
-	
-    [self.decks addObject:newDeck];
-	[self.collectionView reloadData];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Deck"
+                                                        message:@"Please enter the name of the deck."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"OK",nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+    /*
+        */
+
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
