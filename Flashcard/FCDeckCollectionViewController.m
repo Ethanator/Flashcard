@@ -73,12 +73,13 @@
 #warning activity indicator
 	
 	//get the bundle documents URL
-	NSURL * documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	NSURL * databaseURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	databaseURL = [databaseURL URLByAppendingPathComponent:FLASHCARD_DATA_MODEL_NAME];
 	
 	//create a managed document from the douments URl and the appended the model's name
-	UIManagedDocument * databaseDocument = [[UIManagedDocument alloc] initWithFileURL:[documentsURL URLByAppendingPathComponent:FLASHCARD_DATA_MODEL_NAME]];
+	UIManagedDocument * databaseDocument = [[UIManagedDocument alloc] initWithFileURL:databaseURL];
 	
-	if ([[NSFileManager defaultManager] fileExistsAtPath:[documentsURL path]])
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[databaseURL path]])
 	{
 		[databaseDocument openWithCompletionHandler:^(BOOL success) {
 			
@@ -99,7 +100,7 @@
 	}
 	else
 	{
-		[databaseDocument saveToURL:documentsURL
+		[databaseDocument saveToURL:databaseURL
 										forSaveOperation:UIDocumentSaveForCreating
 									 completionHandler:^(BOOL success){
 										 
