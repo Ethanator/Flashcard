@@ -227,5 +227,17 @@
 	[self.collectionView reloadData];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
+                                                      inManagedObjectContext:self.databaseContext];
+        newDeck.name = name;
+        [self.decks addObject:newDeck];
+        [self.collectionView reloadData];
+        // name contains the entered value
+    }
+}
 
 @end
