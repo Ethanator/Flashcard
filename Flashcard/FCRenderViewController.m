@@ -51,8 +51,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	self.renderWebView.scrollView.maximumZoomScale = 4.0;
-	self.renderWebView.scrollView.minimumZoomScale = 0.00000001;
+//	self.renderWebView.scrollView.maximumZoomScale = 4.0;
+//	self.renderWebView.scrollView.minimumZoomScale = 0.00000001;
 	self.cropRectImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RECT_IMAGE_NAME]];
 	self.cropRectImageView.center = self.view.center;
 	self.cropRectImageView.frame = CGRectMake(0, 0, self.cropRectImageView.image.size.width / 3, self.cropRectImageView.image.size.height / 3);
