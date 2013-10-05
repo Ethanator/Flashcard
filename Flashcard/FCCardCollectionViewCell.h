@@ -12,6 +12,4 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *cardView;
 
-- (void)flipCardAtPoint:(CGFloat)point;
-
 @end
