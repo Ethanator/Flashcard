@@ -54,7 +54,23 @@
 	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
 		
 		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
-//		Card *cardToBeDisplayed = [self.deck.cards ]
+		
+		NSInteger cardIndex = indexPath.row;
+		
+		// find which card in the deck is the card to display
+		Card *cardToBeDisplayed = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
+			Card *cardInDeck = (Card *)obj;
+			NSInteger indexOfCardInDeck = [cardInDeck.index doubleValue];
+			BOOL r = (cardIndex == indexOfCardInDeck);
+			return r;
+		}] anyObject];
+		
+		// displaying image
+		if ([cardToBeDisplayed.frontUp boolValue]) {
+			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
+		} else {
+			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.backImagePath];
+		}
 	}
 	
 	return cell;

@@ -27,6 +27,7 @@
 		2C5484A517FFC7D100F13C12 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484A417FFC7D100F13C12 /* Deck.m */; };
 		2C5484A817FFC7D200F13C12 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484A717FFC7D200F13C12 /* Card.m */; };
 		2C5484AA17FFCBFB00F13C12 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5484A917FFCBFB00F13C12 /* CoreData.framework */; };
+		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,8 @@
 		2C5484A617FFC7D200F13C12 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		2C5484A717FFC7D200F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		2C5484A917FFCBFB00F13C12 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
+		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
 		8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCardCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
