@@ -15,7 +15,7 @@
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) NSURL * resourceURL;
+@property (nonatomic, strong) NSURL *resourceURL;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 
@@ -145,7 +145,9 @@
 	[capturedimage fixOrientation];
 	
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
-	[imageData writeToURL:<#(NSURL *)#> atomically:<#(BOOL)#>];
+	[imageData writeToURL:self.resourceURL atomically:YES];
+	
+	[self performSegueWithIdentifier:<#(NSString *)#> sender:<#(id)#>]
 	
 	
 	// push imageData to RenderViewController
