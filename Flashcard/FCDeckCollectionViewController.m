@@ -34,8 +34,25 @@
 
 - (void)viewDidLoad
 {
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
+	 
+																							 name:UIApplicationWillEnterForegroundNotification object:nil];
+
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+-(void)appIntoForeground
+{
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
+	{
+		
+		[[[UIAlertView alloc] initWithTitle:OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE
+																message:nil delegate:nil
+											cancelButtonTitle:OK_BUTTON_TITLE
+											otherButtonTitles: nil] show];
+	}
 }
 
 -(void)viewDidAppear:(BOOL)animated
