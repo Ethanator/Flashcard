@@ -25,8 +25,8 @@
 		2C54849517FFA95D00F13C12 /* FCRenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54849417FFA95D00F13C12 /* FCRenderViewController.m */; };
 		2C54849817FFAEAD00F13C12 /* Flashcard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C54849617FFAEAD00F13C12 /* Flashcard.xcdatamodeld */; };
 		2C5484AA17FFCBFB00F13C12 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5484A917FFCBFB00F13C12 /* CoreData.framework */; };
-		2C5484AD17FFD66400F13C12 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484AC17FFD66400F13C12 /* Card.m */; };
-		2C5484B017FFD66500F13C12 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484AF17FFD66500F13C12 /* Deck.m */; };
+		2C5484B917FFD7BC00F13C12 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484B817FFD7BC00F13C12 /* Deck.m */; };
+		2C5484BC17FFD7BC00F13C12 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484BB17FFD7BC00F13C12 /* Card.m */; };
 		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
@@ -69,10 +69,10 @@
 		2C54849717FFAEAD00F13C12 /* Flashcard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Flashcard.xcdatamodel; sourceTree = "<group>"; };
 		2C5484A117FFB64700F13C12 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		2C5484A917FFCBFB00F13C12 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		2C5484AB17FFD66400F13C12 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
-		2C5484AC17FFD66400F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
-		2C5484AE17FFD66500F13C12 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
-		2C5484AF17FFD66500F13C12 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		2C5484B717FFD7BC00F13C12 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		2C5484B817FFD7BC00F13C12 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		2C5484BA17FFD7BC00F13C12 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		2C5484BB17FFD7BC00F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
 		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
@@ -184,10 +184,10 @@
 			isa = PBXGroup;
 			children = (
 				2C54849617FFAEAD00F13C12 /* Flashcard.xcdatamodeld */,
-				2C5484AB17FFD66400F13C12 /* Card.h */,
-				2C5484AC17FFD66400F13C12 /* Card.m */,
-				2C5484AE17FFD66500F13C12 /* Deck.h */,
-				2C5484AF17FFD66500F13C12 /* Deck.m */,
+				2C5484B717FFD7BC00F13C12 /* Deck.h */,
+				2C5484B817FFD7BC00F13C12 /* Deck.m */,
+				2C5484BA17FFD7BC00F13C12 /* Card.h */,
+				2C5484BB17FFD7BC00F13C12 /* Card.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -322,8 +322,8 @@
 				8899CE7117FFB4550034D788 /* (null) in Sources */,
 				2C54849217FFA92B00F13C12 /* FCCardCollectionViewController.m in Sources */,
 				2C54849817FFAEAD00F13C12 /* Flashcard.xcdatamodeld in Sources */,
-				2C5484B017FFD66500F13C12 /* Deck.m in Sources */,
-				2C5484AD17FFD66400F13C12 /* Card.m in Sources */,
+				2C5484B917FFD7BC00F13C12 /* Deck.m in Sources */,
+				2C5484BC17FFD7BC00F13C12 /* Card.m in Sources */,
 				2C54848F17FFA77900F13C12 /* FCDeckCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
