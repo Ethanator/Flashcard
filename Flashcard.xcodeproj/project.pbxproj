@@ -131,8 +131,9 @@
 		2C54845E17FFA0BE00F13C12 /* Flashcard */ = {
 			isa = PBXGroup;
 			children = (
+				2C5484A217FFBC0700F13C12 /* Other View Subclasses */,
 				2C5484A117FFB64700F13C12 /* Constants.h */,
-				2C5484A017FFB23F00F13C12 /* View Subclasses */,
+				2C5484A017FFB23F00F13C12 /* View Controller Subclasses */,
 				2C54849F17FFB23100F13C12 /* Data */,
 				2C54846717FFA0BE00F13C12 /* FCAppDelegate.h */,
 				2C54846817FFA0BE00F13C12 /* FCAppDelegate.m */,
@@ -184,19 +185,26 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		2C5484A017FFB23F00F13C12 /* View Subclasses */ = {
+		2C5484A017FFB23F00F13C12 /* View Controller Subclasses */ = {
 			isa = PBXGroup;
 			children = (
 				2C54849317FFA95D00F13C12 /* FCRenderViewController.h */,
 				2C54849417FFA95D00F13C12 /* FCRenderViewController.m */,
 				2C54849017FFA92B00F13C12 /* FCCardCollectionViewController.h */,
 				2C54849117FFA92B00F13C12 /* FCCardCollectionViewController.m */,
-				8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */,
-				8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */,
 				2C54848D17FFA77900F13C12 /* FCDeckCollectionViewController.h */,
 				2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */,
 			);
-			name = "View Subclasses";
+			name = "View Controller Subclasses";
+			sourceTree = "<group>";
+		};
+		2C5484A217FFBC0700F13C12 /* Other View Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */,
+				8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */,
+			);
+			name = "Other View Subclasses";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
