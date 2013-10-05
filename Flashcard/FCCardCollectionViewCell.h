@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FCCardImageView.h"
 
 @interface FCCardCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *cardView;
+@property (weak, nonatomic) IBOutlet FCCardImageView *cardView;
 
 @end
