@@ -26,6 +26,7 @@
 		2C54849817FFAEAD00F13C12 /* Flashcard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C54849617FFAEAD00F13C12 /* Flashcard.xcdatamodeld */; };
 		2C54849B17FFB22800F13C12 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54849A17FFB22800F13C12 /* Card.m */; };
 		2C54849E17FFB22900F13C12 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54849D17FFB22900F13C12 /* Deck.m */; };
+		8899CE7117FFB4550034D788 /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7017FFB4550034D788 /* FCDeckCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		2C54849A17FFB22800F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		2C54849C17FFB22900F13C12 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
 		2C54849D17FFB22900F13C12 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		8899CE6F17FFB4550034D788 /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
+		8899CE7017FFB4550034D788 /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +190,8 @@
 				2C54849117FFA92B00F13C12 /* FCCardCollectionViewController.m */,
 				2C54848D17FFA77900F13C12 /* FCDeckCollectionViewController.h */,
 				2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */,
+				8899CE6F17FFB4550034D788 /* FCDeckCollectionViewCell.h */,
+				8899CE7017FFB4550034D788 /* FCDeckCollectionViewCell.m */,
 			);
 			name = "View Subclasses";
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				2C54846517FFA0BE00F13C12 /* main.m in Sources */,
 				2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */,
 				2C54849517FFA95D00F13C12 /* FCRenderViewController.m in Sources */,
+				8899CE7117FFB4550034D788 /* FCDeckCollectionViewCell.m in Sources */,
 				2C54849217FFA92B00F13C12 /* FCCardCollectionViewController.m in Sources */,
 				2C54849817FFAEAD00F13C12 /* Flashcard.xcdatamodeld in Sources */,
 				2C54849B17FFB22800F13C12 /* Card.m in Sources */,
@@ -505,6 +511,7 @@
 				2C54848917FFA0BE00F13C12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C54848A17FFA0BE00F13C12 /* Build configuration list for PBXNativeTarget "FlashcardTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +520,7 @@
 				2C54848C17FFA0BE00F13C12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

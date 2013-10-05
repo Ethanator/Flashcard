@@ -7,6 +7,7 @@
 //
 
 #import "FCCardCollectionViewController.h"
+#import "FCDeckCollectionViewCell.h"
 #import "Deck.h"
 #import "Card.h"
 
@@ -43,11 +44,18 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return [self.cardsInDeck count];
+	return [self.deck.cards count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+	UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Card" forIndexPath:indexPath];
+	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
+		FCDeckCollectionViewCell *viewCell = (FCDeckCollectionViewCell *)cell;
+		
+		// setup of each view cell
+	}
 	
+	return cell;
 }
 
 
