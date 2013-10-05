@@ -259,17 +259,21 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
 	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE]) {
+		
+		
 		switch (buttonIndex) {
-			case 1:
+			case 0:
 				// "cancel"
 				break;
 				
-			case 2:
+			case 1:
 				// "done"
 				// TO-DO: render text into image
 				
 				for (UIView *view in alertView.subviews) {
-					if ([view isKindOfClass:[UITextField class]]) {
+					
+					if ([view isKindOfClass:[UITextField class]])
+					{
 						UITextField *textField = (UITextField *)view;
 						NSString *stringToRender = textField.text;
 						
@@ -313,7 +317,7 @@
 				}
 				
 				
-				
+				break;
 			default:
 				break;
 		}
