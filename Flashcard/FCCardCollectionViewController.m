@@ -21,6 +21,8 @@
 - (void)renderText;
 - (void)cameraButtonTapped:(id)sender;
 
+// methods to handle UIAlertView actions, coming from UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
 
 @end
@@ -131,6 +133,8 @@
 	
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
 	
+	
+	
 	// push imageData to RenderViewController
 	
 	[self.collectionView reloadData];
@@ -194,8 +198,30 @@
 													  cancelButtonTitle:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE
 													  otherButtonTitles:PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES];
 	promptForTextView.alertViewStyle = UIAlertViewStylePlainTextInput;
-	
+	[promptForTextView show];
 }
+
+
+// method to handle UIAlertView action
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch (buttonIndex) {
+		case 1:
+			// cancel
+			break;
+			
+		case 2:
+			// done
+			// TO-DO: render text into image
+			NSString *textToRender = [alertView ]
+			
+			// TO-DO: send image to render
+			
+			
+		default:
+			break;
+	}
+}
+
 
 
 @end
