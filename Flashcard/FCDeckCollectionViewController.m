@@ -103,7 +103,7 @@
 		Deck* deck = self.decks[deckIndex];
         cell.index = deckIndex;
 		cell.deckName.text = deck.name;
-        cell.deckImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:((Card *)[deck.cards anyObject]).frontImagePath]];
+        cell.deckImageView.image = [UIImage imageWithContentsOfFile:((Card *)[deck.cards anyObject]).frontImagePath];
     }
 	
 	// appearance
