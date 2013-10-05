@@ -170,7 +170,6 @@
 	[actionSheet showInView:self.view];
 }
 
-
 // from UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -287,7 +286,7 @@
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
 						
-			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body>%@</body></html>", stringToRender];
+			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 200px; height: 150px; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
@@ -331,11 +330,11 @@
 	card.frontImagePath = front;
 	card.backImagePath = back;
 	card.frontUp = [NSNumber numberWithBool:FALSE];
+	card.deck = self.deck;
+	card.index = [NSNumber numberWithInt:[self.deck.cards count] + 1];
 	
+	// Save
 	
-	// View
-	[self.deck addCardsObject:card];
-	[self.collectionView reloadData];
 	
 
 }

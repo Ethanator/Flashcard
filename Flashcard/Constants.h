@@ -53,6 +53,9 @@
 // below is for animated flipping
 #define FLIPPING_ANIMATION_DURATION 0.5
 
+// below are for custom UIImageView
+#define CARD_IMAGE_CORNER_RADIUS 8.0
+
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
 #define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
