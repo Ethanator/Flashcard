@@ -26,6 +26,7 @@
 - (void)renderText;
 - (void)promptURL;
 - (void)cameraButtonTapped:(id)sender;
+- (void)getImageFromPhotos;
 
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
@@ -49,7 +50,8 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
 	 
 																							 name:UIApplicationDidBecomeActiveNotification object:nil];
-    [super viewDidLoad];
+	
+	    [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
@@ -66,7 +68,15 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+	
+	
 	[self appIntoForeground];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationItem.title = self.deck.name;
+
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -174,7 +184,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
-//	capturedimage = [capturedimage fixOrientation];
+	capturedimage = [capturedimage fixOrientation];
 		
 //	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 //	
@@ -189,7 +199,7 @@
 	
 	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"tempImage.png"]];
 
-	//	NSLog((@"pre writing to file"));
+		NSLog((@"pre writing to file"));
 	if (![imageData writeToFile:imagePath atomically:NO])
 	{
 		NSLog((@"Failed to cache image data to disk"));
@@ -224,8 +234,13 @@
 			break;
 			
 		case 2:
-			// image case
+			// camera case
 			[self cameraButtonTapped:self];
+			break;
+			
+		case 3:
+			// photos case
+			[self getImageFromPhotos];
 			break;
 			
 		default:
@@ -237,20 +252,49 @@
 // method to handle image case
 - (void)cameraButtonTapped:(id)sender
 {
-	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
-									message:nil
-								   delegate:self
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil] show];
-		return;
-	}
-	picker.delegate = self;
-	[self presentViewController:picker animated:YES completion:nil];
+	
+	[self startCameraControllerFromViewController:self
+																	usingDelegate:self];
+	
+//	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+//	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//	} else {
+//		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
+//									message:nil
+//								   delegate:self
+//						  cancelButtonTitle:@"OK"
+//						  otherButtonTitles:nil] show];
+//		return;
+//	}
+//	picker.delegate = self;
+//	[self presentViewController:picker animated:YES completion:nil];
 }
+
+- (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
+																	 usingDelegate: (id <UIImagePickerControllerDelegate,
+																									 UINavigationControllerDelegate>) delegate {
+	
+	if (([UIImagePickerController isSourceTypeAvailable:
+				UIImagePickerControllerSourceTypeCamera] == NO)
+			|| (delegate == nil)
+			|| (controller == nil))
+		return NO;
+	
+	
+	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+	cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+		
+	// Hides the controls for moving & scaling pictures, or for
+	// trimming movies. To instead show the controls, use YES.
+	cameraUI.allowsEditing = NO;
+	
+	cameraUI.delegate = delegate;
+	
+	[controller presentViewController:cameraUI animated:YES completion:nil];
+	return YES;
+}
+
 
 // method to handle text case
 - (void)renderText {
@@ -274,6 +318,20 @@
 	[promptForURLView show];
 }
 
+-(void) getImageFromPhotos
+{
+	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+	cameraUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+	
+	// Hides the controls for moving & scaling pictures, or for
+	// trimming movies. To instead show the controls, use YES.
+	cameraUI.allowsEditing = NO;
+	
+	cameraUI.delegate = self;
+	
+	[self presentViewController:cameraUI animated:YES completion:nil];
+}
+
 // method to handle UIAlertView action, from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
@@ -286,7 +344,7 @@
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
 						
-			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 200px; height: 150px; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
+			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 500px; height: 500px; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
@@ -325,7 +383,6 @@
 // required method from FCRenderViewControllerDelegate
 - (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
-	// Model
 	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.deck.managedObjectContext];
 	card.frontImagePath = front;
 	card.backImagePath = back;
@@ -333,9 +390,12 @@
 	card.deck = self.deck;
 	card.index = [NSNumber numberWithInt:[self.deck.cards count] + 1];
 	
-	// Save
+	NSError *error;
+	if (![self.deck.managedObjectContext save:&error]) {
+		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+	}
 	
-	
+	[self.collectionView reloadData];
 
 }
 

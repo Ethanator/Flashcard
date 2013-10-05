@@ -84,7 +84,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Df-LX-D04">
+                            <webView multipleTouchEnabled="YES" contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Df-LX-D04">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -111,6 +111,8 @@
                         <constraints>
                             <constraint firstItem="7Df-LX-D04" firstAttribute="leading" secondItem="V6j-8n-dtV" secondAttribute="leading" id="5hO-h1-BS6"/>
                             <constraint firstAttribute="trailing" secondItem="3Hc-eH-F1k" secondAttribute="trailing" id="E5I-uQ-Q7z"/>
+                            <constraint firstItem="8fk-m1-xyS" firstAttribute="top" secondItem="3Hc-eH-F1k" secondAttribute="bottom" id="F4M-c7-Xd7"/>
+                            <constraint firstItem="3Hc-eH-F1k" firstAttribute="top" secondItem="7Df-LX-D04" secondAttribute="bottom" id="IT8-2O-ZeH"/>
                             <constraint firstAttribute="bottom" secondItem="3Hc-eH-F1k" secondAttribute="bottom" id="WNh-ox-1uL"/>
                             <constraint firstAttribute="trailing" secondItem="7Df-LX-D04" secondAttribute="trailing" id="c7J-L5-EGL"/>
                             <constraint firstItem="3Hc-eH-F1k" firstAttribute="leading" secondItem="V6j-8n-dtV" secondAttribute="leading" id="kDm-JW-RCf"/>
