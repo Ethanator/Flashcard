@@ -7,6 +7,7 @@
 //
 
 #import "FCDeckCollectionViewController.h"
+#import "FCDeckCollectionViewCell.h"
 #import "Deck.h"
 
 @interface FCDeckCollectionViewController ()
