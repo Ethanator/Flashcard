@@ -24,6 +24,7 @@
 
 // methods to handle different types of inputs
 - (void)renderText;
+- (void)promptURL;
 - (void)cameraButtonTapped:(id)sender;
 
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
@@ -139,11 +140,22 @@
 	// update the view
 	FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
 	
-	if ([cardToBeChanged.frontUp boolValue]) {
-		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
-	} else {
-		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
-	}
+//	if ([cardToBeChanged.frontUp boolValue]) {
+//		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+//	} else {
+//		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+//	}
+	
+	[UIView transitionWithView:viewCell.cardView
+					  duration:FLIPPING_ANIMATION_DURATION
+					   options:UIViewAnimationOptionTransitionFlipFromLeft 
+					animations:^{
+						if ([cardToBeChanged.frontUp boolValue]) {
+							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+						} else {
+							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+						}
+					} completion:NULL];
 	
 }
 
@@ -200,9 +212,6 @@
 // code from UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// as in <UIActionSheetDelegate>
-	// push only for url
-	// method for text
-	// UIImagePickerController for camera
 	
 	switch (buttonIndex) {
 		case 0:
@@ -212,7 +221,7 @@
 			
 		case 1:
 			// web case
-			
+			[self promptURL];
 			break;
 			
 		case 2:
@@ -245,7 +254,6 @@
 }
 
 // method to handle text case
-// might want to change the size of the image since it's way too big
 - (void)renderText {
 	UIAlertView *promptForTextView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_TEXT_TITLE
 																message:PROMPT_FOR_TEXT_MESSAGE
@@ -256,8 +264,19 @@
 	[promptForTextView show];
 }
 
+// method to handle web case
+- (void)promptURL {
+	UIAlertView *promptForURLView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_URL_TITLE
+																message:PROMPT_FOR_URL_MESSAGE
+															   delegate:self
+													  cancelButtonTitle:PROMPT_FOR_URL_CANCEL_BUTTON_TITLE
+													  otherButtonTitles:PROMPT_FOR_URL_OTHER_BUTTON_TITLES];
+	promptForURLView.alertViewStyle = UIAlertViewStylePlainTextInput;
+	[promptForURLView show];
+}
+
 // method to handle UIAlertView action, from UIAlertViewDelegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
 	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_TITLE]) {
 		
@@ -267,22 +286,8 @@
 		} else if (buttonIndex == 1) {
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
-			
-			
-			// deprecated UIKit drawing, very highly pixelated
-			 
-//			UIFont *oldFont = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
-//			CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
-//
-//			UIGraphicsBeginImageContext(size);
-//			UIGraphicsBeginImageContextWithOptions(size,NO,0.0);
-//			
-//			[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
-//
-//			UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//			UIGraphicsEndImageContext();
-			
-			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 2em; font-family: sans-serif; }</style></head> <body>%@</body></html>", stringToRender];
+						
+			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body>%@</body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
@@ -306,10 +311,19 @@
 			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 		}
 		
+	} else if ([alertView.title isEqualToString:PROMPT_FOR_URL_TITLE]) {
+		if (buttonIndex == 0) {
+			NSLog(@"User Canceled with the cancel button.");
+			return;
+		} else if (buttonIndex == 1) {
+			NSString *fileURL = [alertView textFieldAtIndex:0].text;
+			self.resourceURL = [NSURL fileURLWithPath:fileURL];
+			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
+		}
 	}
 }
 
-// method from FCRenderViewControllerDelegate
+// required method from FCRenderViewControllerDelegate
 - (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
 	// Model
@@ -318,10 +332,10 @@
 	card.backImagePath = back;
 	card.frontUp = [NSNumber numberWithBool:FALSE];
 	
-	[self.deck addCardsObject:card];
 	
 	// View
-	
+	[self.deck addCardsObject:card];
+	[self.collectionView reloadData];
 	
 
 }

@@ -218,6 +218,7 @@
 	
 }
 
+// Display an alert view when the bar add button is pressed
 - (IBAction)addNewDeck:(id)sender {
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Deck"
@@ -232,6 +233,7 @@
 
 }
 
+// Create a new deck based on the information passed by the alert view
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
@@ -244,5 +246,33 @@
         // name contains the entered value
     }
 }
+
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
+}
+
+-(BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+	if (action == @selector(cut:))
+	{
+		return YES;
+	} else return NO;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+	if (action == @selector(cut:))
+	{
+		int itemIndex = [indexPath indexAtPosition:1];
+		Deck * deckToBeDeleted = self.decks[itemIndex];
+        [self.decks removeObject:deckToBeDeleted];
+		[self.databaseContext deleteObject:deckToBeDeleted];
+		[self.collectionView reloadData];
+	}
+}
+
+
+
 
 @end

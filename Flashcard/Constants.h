@@ -41,11 +41,24 @@
 #define PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE @"Cancel"
 #define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES @"Done", nil
 
+// below are titles for buttons for prompting for url input
+#define PROMPT_FOR_URL_TITLE @"URL of file"
+#define PROMPT_FOR_URL_MESSAGE nil
+#define PROMPT_FOR_URL_CANCEL_BUTTON_TITLE @"Cancel"
+#define PROMPT_FOR_URL_OTHER_BUTTON_TITLES @"Done", nil
+
 // below are for text rendering
 #define RENDERED_TEXT_SIZE 26.0f
+
+// below is for animated flipping
+#define FLIPPING_ANIMATION_DURATION 0.5
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
 #define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
+#define ALERT_VIEW_TITLE @"New Deck"
+#define ALERT_VIEW_MESSAGE @"Please enter the name of the deck."
+#define ALERT_VIEW_CANCEL_BUTTON @"Cancel"
+#define ALERT_VIEW_OTHER_BUTTON @"OK",nil
 
 #endif
