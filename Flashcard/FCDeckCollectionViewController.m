@@ -221,11 +221,11 @@
 // Display an alert view when the bar add button is pressed
 - (IBAction)addNewDeck:(id)sender {
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Deck"
-                                                        message:@"Please enter the name of the deck."
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:ALERT_VIEW_TITLE
+                                                        message:ALERT_VIEW_MESSAGE
                                                        delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"OK",nil];
+                                              cancelButtonTitle:ALERT_VIEW_CANCEL_BUTTON
+                                              otherButtonTitles:ALERT_VIEW_OTHER_BUTTON];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView show];
     /*

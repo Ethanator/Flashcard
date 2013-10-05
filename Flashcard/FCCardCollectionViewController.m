@@ -175,7 +175,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
-	capturedimage = [capturedimage fixOrientation];
+//	capturedimage = [capturedimage fixOrientation];
 		
 //	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 //	
