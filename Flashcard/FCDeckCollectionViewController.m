@@ -18,7 +18,6 @@
 @property (strong, nonatomic) NSMutableArray *decks;
 @property (strong, nonatomic) Deck *selectedDeck;
 @property (strong, nonatomic) NSManagedObjectContext *databaseContext;
-@property (weak, nonatomic) IBOutlet UIWebView *testWebView;
 
 @end
 
@@ -38,10 +37,6 @@
 
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
-    NSString *testStr = @"http://openclipart.org/image/800px/svg_to_png/164215/any_color_round_square_button.png";
-    NSURL *testURL = [NSURL URLWithString:[testStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [self.testWebView loadRequest:[NSURLRequest requestWithURL:testURL]];
-    self.testWebView.scalesPageToFit = YES;
 }
 
 -(void)appIntoForeground
