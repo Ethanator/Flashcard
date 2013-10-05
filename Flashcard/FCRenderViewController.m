@@ -44,8 +44,8 @@
     [super viewDidLoad];
     
     self.renderWebView.delegate = self;
-	//NSString *testString = @"http://www.google.com";
-//    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	NSString *testString = @"http://www.google.com";
+    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [self loadURLToWebView];
 	// Do any additional setup after loading the view.
 	
