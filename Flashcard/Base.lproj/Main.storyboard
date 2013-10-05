@@ -25,8 +25,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="170" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnJ-EW-DCO">
-                                            <rect key="frame" x="64" y="68" width="42" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnJ-EW-DCO">
+                                            <rect key="frame" x="20" y="68" width="130" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,27 +81,41 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Hc-eH-F1k">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Hc-eH-F1k">
                                 <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Front" id="ZRu-xT-780"/>
+                                    <barButtonItem title="Front" id="ZRu-xT-780">
+                                        <connections>
+                                            <action selector="frontButtonTapped:" destination="WCP-Pw-HjI" id="zOg-ka-eCg"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Z5M-SZ-HiY"/>
-                                    <barButtonItem title="Back" id="0WQ-fY-rUr"/>
+                                    <barButtonItem title="Back" id="0WQ-fY-rUr">
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="WCP-Pw-HjI" id="LN2-H7-wJE"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7Df-LX-D04" firstAttribute="leading" secondItem="V6j-8n-dtV" secondAttribute="leading" id="5hO-h1-BS6"/>
+                            <constraint firstAttribute="trailing" secondItem="3Hc-eH-F1k" secondAttribute="trailing" id="E5I-uQ-Q7z"/>
                             <constraint firstAttribute="bottom" secondItem="3Hc-eH-F1k" secondAttribute="bottom" id="WNh-ox-1uL"/>
                             <constraint firstAttribute="trailing" secondItem="7Df-LX-D04" secondAttribute="trailing" id="c7J-L5-EGL"/>
+                            <constraint firstItem="3Hc-eH-F1k" firstAttribute="leading" secondItem="V6j-8n-dtV" secondAttribute="leading" id="kDm-JW-RCf"/>
                             <constraint firstItem="7Df-LX-D04" firstAttribute="top" secondItem="V6j-8n-dtV" secondAttribute="top" id="me5-js-Mar"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="vye-Rs-7eu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="phj-8k-DCP"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="phj-8k-DCP">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="WCP-Pw-HjI" id="EpB-q2-lKA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>

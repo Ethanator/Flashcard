@@ -221,7 +221,7 @@
 - (IBAction)addNewDeck:(id)sender {
     Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
                                                   inManagedObjectContext:self.databaseContext];
-	newDeck.name = @"Stupid Ethan";
+	newDeck.name = @"New Deck";
 	
     [self.decks addObject:newDeck];
 	[self.collectionView reloadData];

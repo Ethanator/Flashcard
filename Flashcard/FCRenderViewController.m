@@ -10,10 +10,19 @@
 #import "Constants.h"
 
 @interface FCRenderViewController () <UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIWebView *renderWebView;
 @property (strong, nonatomic) NSManagedObjectContext *databaseContext;
 
 @property (nonatomic, strong) UIImageView * cropRectImageView;
+
+//model
+@property (nonatomic, strong) NSString * frontPath;
+@property (nonatomic, strong) NSString * backPath;
+@property (nonatomic, strong) UIImage * frontImage;
+@property (nonatomic, strong) UIImage * backImage;
+@property (nonatomic, strong) UIImageView * frontImageView;
+@property (nonatomic, strong) UIImageView * backImageView;
 
 @end
 
@@ -105,6 +114,158 @@ newY,
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"Finished");
+}
+
+
+//Actions
+- (IBAction)doneButtonTapped:(UIBarButtonItem *)sender
+{
+	if (self.frontPath && self.backPath)
+	{
+		[self.delegate didCollectFrontPath:self.frontPath andBackPath:self.backPath];
+		[self.navigationController popViewControllerAnimated:YES];
+	} else {
+		[[[UIAlertView alloc] initWithTitle:@"Please select a front and back image"
+																message:nil
+															 delegate:nil cancelButtonTitle:@"OK"
+											otherButtonTitles:nil] show];
+	}
+	
+}
+- (IBAction)backButtonTapped:(UIBarButtonItem *)sender
+{
+	UIImage * screenImage = [self screenshot];
+	CGImageRef imageRef = CGImageCreateWithImageInRect([screenImage CGImage], self.cropRectImageView.frame);
+	UIImage* croppedImage = [UIImage imageWithCGImage:imageRef];
+	CGImageRelease(imageRef);
+	
+	NSData * imagePNGData = UIImagePNGRepresentation(croppedImage);
+	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	[[NSUserDefaults standardUserDefaults] synchronize];
+		
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"backImage%d.png",cardUniqueIDCounter]];
+	
+	//	NSLog((@"pre writing to file"));
+	if (![imagePNGData writeToFile:imagePath atomically:NO])
+	{
+		NSLog((@"Failed to cache (back) image data to disk"));
+	}
+	else
+	{
+		NSLog(@"the cachedImagedPath (back) is %@",imagePath);
+	}
+	
+	self.backPath = imagePath;
+	self.backImage = croppedImage;
+	self.backImageView = [[UIImageView alloc] initWithFrame:self.cropRectImageView.frame];
+	self.backImageView.image = self.backImage;
+	[self.view addSubview:self.backImageView];
+	
+	//animate that view to the top right
+	self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.backImageView.frame.size.width / 2, self.backImageView.frame.size.width / 2);
+	self.backImageView.frame = CGRectMake(self.backImageView.frame.origin.x,
+																	 self.backImageView.frame.origin.y,
+																	 self.backImageView.frame.size.width / 2,
+																	 self.backImageView.frame.size.height / 2);
+}
+- (IBAction)frontButtonTapped:(UIBarButtonItem *)sender
+{
+	UIImage * screenImage = [self screenshot];
+	CGImageRef imageRef = CGImageCreateWithImageInRect([screenImage CGImage], self.cropRectImageView.frame);
+	UIImage* croppedImage = [UIImage imageWithCGImage:imageRef];
+	CGImageRelease(imageRef);
+	
+	NSData * imagePNGData = UIImagePNGRepresentation(croppedImage);
+	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"frontImage%d.png",cardUniqueIDCounter]];
+	
+	//	NSLog((@"pre writing to file"));
+	if (![imagePNGData writeToFile:imagePath atomically:NO])
+	{
+		NSLog((@"Failed to cache (front) image data to disk"));
+	}
+	else
+	{
+		NSLog(@"the cachedImagedPath (front) is %@",imagePath);
+	}
+	
+	self.frontPath = imagePath;
+	self.frontImage = croppedImage;
+	self.frontImageView = [[UIImageView alloc] initWithFrame:self.cropRectImageView.frame];
+	self.frontImageView.image = self.frontImage;
+	[self.view addSubview:self.frontImageView];
+
+	self.frontImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.frontImageView.frame.size.width / 2, self.frontImageView.frame.size.width / 2);
+	self.frontImageView.frame = CGRectMake(self.frontImageView.frame.origin.x,
+																	 self.frontImageView.frame.origin.y,
+																	 self.frontImageView.frame.size.width / 2,
+																	 self.frontImageView.frame.size.height / 2);
+}
+
+//got this method from apple's website:
+//http://developer.apple.com/library/ios/#qa/qa1703/_index.html#//apple_ref/doc/uid/DTS40010193
+- (UIImage*)screenshot
+{
+	// Create a graphics context with the target size
+	// On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
+	// On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
+	CGSize imageSize = [[UIScreen mainScreen] bounds].size;
+	if (NULL != UIGraphicsBeginImageContextWithOptions)
+		UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+	else
+		UIGraphicsBeginImageContext(imageSize);
+	//	NSLog(@"time stamp");
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	//	NSLog(@"time stamp");
+	// Iterate over every window from back to front
+	for (UIWindow *window in [[UIApplication sharedApplication] windows])
+	{
+		//		NSLog(@"time stamp");
+		if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
+		{
+			// -renderInContext: renders in the coordinate space of the layer,
+			// so we must first apply the layer's geometry to the graphics context
+			CGContextSaveGState(context);
+			// Center the context around the window's anchor point
+			CGContextTranslateCTM(context, [window center].x, [window center].y);
+			// Apply the window's transform about the anchor point
+			CGContextConcatCTM(context, [window transform]);
+			// Offset by the portion of the bounds left of and above the anchor point
+			CGContextTranslateCTM(context,
+														-[window bounds].size.width * [[window layer] anchorPoint].x,
+														-[window bounds].size.height * [[window layer] anchorPoint].y);
+			
+			// Render the layer hierarchy to the current context
+			[[window layer] renderInContext:context];
+			
+			// Restore the context
+			CGContextRestoreGState(context);
+		}
+	}
+	//	NSLog(@"time stamp");
+	
+	// Retrieve the screenshot image
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	//	NSLog(@"time stamp");
+	
+	UIGraphicsEndImageContext();
+		
+	return image;
 }
 
 
