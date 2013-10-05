@@ -13,7 +13,7 @@
 #import "UIImage+cameraOrientationFix.h"
 #import "Constants.h"
 
-@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 
@@ -111,27 +111,14 @@
 }
 
 - (IBAction)addCard:(id)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:ACTION_SHEET_TITLE delegate:self cancelButtonTitle:CANCEL_BUTTON_TITLE destructiveButtonTitle:DESTRUCTIVE_BUTTON_TITLE otherButtonTitles:OTHER_BUTTON_TITLES];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:ADD_CARD_ACTION_SHEET_TITLE
+															 delegate:self
+													cancelButtonTitle:ADD_CARD_CANCEL_BUTTON_TITLE
+											   destructiveButtonTitle:ADD_CARD_DESTRUCTIVE_BUTTON_TITLE
+													otherButtonTitles:ADD_CARD_OTHER_BUTTON_TITLES];
 	
 	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
 	[actionSheet showInView:self.view];
-}
-
-- (void)cameraButtonTapped:(id)sender
-{
-	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	else
-	{
-		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
-									message:nil
-								   delegate:self
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil] show];
-		return;
-	}
-	picker.delegate = self;
-	[self presentViewController:picker animated:YES completion:nil];
 }
 
 
@@ -162,11 +149,12 @@
 	switch (buttonIndex) {
 		case 0:
 			// text case
-//			renderText();	// TO BE IMPLEMENTED
+			[self renderText];
 			break;
 			
 		case 1:
 			// web case
+			
 			break;
 			
 		case 2:
@@ -180,8 +168,32 @@
 	
 }
 
-- (void)renderText {
-	
+// method to handle image case
+- (void)cameraButtonTapped:(id)sender
+{
+	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	} else {
+		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
+									message:nil
+								   delegate:self
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+		return;
+	}
+	picker.delegate = self;
+	[self presentViewController:picker animated:YES completion:nil];
 }
+
+// method to handle text case
+- (void)renderText {
+	UIAlertView *promptForTextView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_TEXT_TITLE
+																message:PROMPT_FOR_TEXT_MESSAGE
+															   delegate:self
+													  cancelButtonTitle:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE
+													  otherButtonTitles:PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES];
+}
+
 
 @end
