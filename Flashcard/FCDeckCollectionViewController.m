@@ -53,6 +53,25 @@
 	return [self.decks count];
 }
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
+	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
+		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
+		
+		// IS IT ANYOBJECT?
+		Card *cardToBeDisplayed = [self.deck.cards anyObject];
+		
+		// displaying image
+		if ([cardToBeDisplayed.frontUp boolValue]) {
+			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
+		} else {
+			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.backImagePath];
+		}
+	}
+	
+	return cell;
+}
+
 
 - (void)pullCoreData {
 	

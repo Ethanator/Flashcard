@@ -26,6 +26,7 @@
 		2C54849817FFAEAD00F13C12 /* Flashcard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C54849617FFAEAD00F13C12 /* Flashcard.xcdatamodeld */; };
 		2C5484A517FFC7D100F13C12 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484A417FFC7D100F13C12 /* Deck.m */; };
 		2C5484A817FFC7D200F13C12 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484A717FFC7D200F13C12 /* Card.m */; };
+		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,8 @@
 		2C5484A417FFC7D100F13C12 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
 		2C5484A617FFC7D200F13C12 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		2C5484A717FFC7D200F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
+		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
 		8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCardCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,8 +136,6 @@
 			children = (
 				2C5484A217FFBC0700F13C12 /* Other View Subclasses */,
 				2C5484A117FFB64700F13C12 /* Constants.h */,
-				3F7AEFB217FFCD12002D6D9A /* FCDeckCollectionViewCell.h */,
-				3F7AEFB317FFCD12002D6D9A /* FCDeckCollectionViewCell.m */,
 				2C5484A017FFB23F00F13C12 /* View Controller Subclasses */,
 				2C54849F17FFB23100F13C12 /* Data */,
 				2C54846717FFA0BE00F13C12 /* FCAppDelegate.h */,
@@ -190,12 +191,16 @@
 		2C5484A017FFB23F00F13C12 /* View Controller Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */,
+				8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */,
 				2C54849317FFA95D00F13C12 /* FCRenderViewController.h */,
 				2C54849417FFA95D00F13C12 /* FCRenderViewController.m */,
 				2C54849017FFA92B00F13C12 /* FCCardCollectionViewController.h */,
 				2C54849117FFA92B00F13C12 /* FCCardCollectionViewController.m */,
 				2C54848D17FFA77900F13C12 /* FCDeckCollectionViewController.h */,
 				2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */,
+				3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */,
+				3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */,
 			);
 			name = "View Controller Subclasses";
 			sourceTree = "<group>";
@@ -203,8 +208,6 @@
 		2C5484A217FFBC0700F13C12 /* Other View Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */,
-				8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */,
 			);
 			name = "Other View Subclasses";
 			sourceTree = "<group>";
@@ -311,7 +314,7 @@
 				8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */,
 				2C54846517FFA0BE00F13C12 /* main.m in Sources */,
 				2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */,
-				3F7AEFB417FFCD12002D6D9A /* FCDeckCollectionViewCell.m in Sources */,
+				3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */,
 				2C54849517FFA95D00F13C12 /* FCRenderViewController.m in Sources */,
 				2C5484A817FFC7D200F13C12 /* Card.m in Sources */,
 				8899CE7117FFB4550034D788 /* (null) in Sources */,
