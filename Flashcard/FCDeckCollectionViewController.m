@@ -58,11 +58,15 @@
 	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[documentsURL path]])
 	{
-		[self.databaseDocument openWithCompletionHandler:^(BOOL success) {
+		[databaseDocument openWithCompletionHandler:^(BOOL success) {
+			
+			//turn off the activity indicator
+#warning activity indicator
+
 			if (success)
 			{
-				[self.imagesLoadingActivityIndicator stopAnimating];
-				[self documentIsReady];
+				//pull the data from the document
+				[self documentIsReady:databaseDocument];
 			}
 			else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
 																			 message:nil
@@ -73,13 +77,20 @@
 	}
 	else
 	{
-		[self.databaseDocument saveToURL:documentsURL
+		[databaseDocument saveToURL:documentsURL
 										forSaveOperation:UIDocumentSaveForCreating
 									 completionHandler:^(BOOL success){
+										 
+										 //turn off the activity indicator
+#warning activity indicator
+
 										 if (success)
 										 {
-											 [self.imagesLoadingActivityIndicator stopAnimating];
-											 [self newDocumentIsReady];
+											 //pull the data from the document
+											 [self documentIsReady:databaseDocument];
+
+											 //Put in a filler Deck because this is the first time the user has opened the app
+											 [self firstTimeDeckInsert];
 										 }
 										 else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
 																											message:nil
@@ -91,6 +102,61 @@
 
 	
 }
+
+-(void)documentIsReady:(UIManagedDocument *)databaseDocument
+{
+	NSManagedObjectContext * databaseContext = databaseDocument.managedObjectContext;
+	
+	NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:DECK_ENTITY_NAME];
+	// fetch the decks, store them to array
+	
+	NSError * error;
+	NSArray * savedPhotoObjectsArray = [self.databaseContext executeFetchRequest:request error:&error];
+	
+	NSMutableArray * tempImageArray = [[NSMutableArray alloc] init];
+	
+	for (TDMPhoto * photoObject in savedPhotoObjectsArray)
+	{
+    [tempImageArray addObject:photoObject];
+	}
+	self.imageArray = [tempImageArray copy];
+	[self.collectionView reloadData];
+}
+
+-(void)firstTimeDeckInsert
+{
+	//Put in a filler Deck because this is the first time the user has opened the app
+	
+	UIImage * capturedimage = [UIImage imageNamed:@"fillerImage.png"];
+	
+	capturedimage = [self fixOrientation:capturedimage];
+	
+	NSData *imageData = UIImagePNGRepresentation(capturedimage);
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",[self.imageArray count]+1]];
+	
+	//	NSLog((@"pre writing to file"));
+	if (![imageData writeToFile:imagePath atomically:NO])
+	{
+		//    NSLog((@"Failed to cache image data to disk"));
+	}
+	else
+	{
+		//    NSLog(@"the cachedImagedPath is %@",imagePath);
+		TDMPhoto* photo = [self savePhotoWithPath:imagePath];
+		NSMutableArray* tempImageArray = [self.imageArray mutableCopy];
+		[tempImageArray  addObject:photo];
+		self.imageArray = [tempImageArray copy];
+		
+	}
+	
+	[self.collectionView reloadData];
+	
+}
+
 
 
 @end
