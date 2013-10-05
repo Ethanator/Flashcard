@@ -111,11 +111,11 @@
 	// fetch the decks, store them to array
 	
 	NSError * error;
-	NSArray * savedPhotoObjectsArray = [self.databaseContext executeFetchRequest:request error:&error];
+	NSArray * deckArray = [databaseContext executeFetchRequest:request error:&error];
 	
 	NSMutableArray * tempImageArray = [[NSMutableArray alloc] init];
 	
-	for (TDMPhoto * photoObject in savedPhotoObjectsArray)
+	for (Deck * deckObject in savedPhotoObjectsArray)
 	{
     [tempImageArray addObject:photoObject];
 	}
