@@ -90,6 +90,9 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="phj-8k-DCP"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="renderWebView" destination="7Df-LX-D04" id="HDU-ne-1Nf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhE-51-EmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
