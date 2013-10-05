@@ -24,6 +24,8 @@
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
+#define KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS @"CounterForImageUniqueID"
+
 
 // below are titles for buttons for adding a new card
 #define ADD_CARD_ACTION_SHEET_TITLE nil
