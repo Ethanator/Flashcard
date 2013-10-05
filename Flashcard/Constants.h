@@ -20,6 +20,7 @@
 #define EXTERNALLY_OPENED_URL_DEFAULTS @"externallyOpenedURL"
 #define OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE @"Please choose a flashcard deck for your card:"
 #define OK_BUTTON_TITLE @"OK"
+#define CARD_TO_RENDER_SEGUE_IDENTIFIER @"ShowRenderViewController"
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
