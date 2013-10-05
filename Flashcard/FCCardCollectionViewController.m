@@ -56,7 +56,12 @@
 		// IS IT ANYOBJECT?
 		Card *cardToBeDisplayed = [self.deck.cards anyObject];
 		
-		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
+		// displaying image
+		if ([cardToBeDisplayed.frontUp boolValue]) {
+			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
+		} else {
+			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.backImagePath];
+		}
 	}
 	
 	return cell;

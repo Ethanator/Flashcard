@@ -178,9 +178,9 @@
 		2C54849F17FFB23100F13C12 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2C5484A317FFC7D100F13C12 /* Deck.h */,
 				2C5484A617FFC7D200F13C12 /* Card.h */,
 				2C5484A717FFC7D200F13C12 /* Card.m */,
+				2C5484A317FFC7D100F13C12 /* Deck.h */,
 				2C5484A417FFC7D100F13C12 /* Deck.m */,
 				2C54849617FFAEAD00F13C12 /* Flashcard.xcdatamodeld */,
 			);
