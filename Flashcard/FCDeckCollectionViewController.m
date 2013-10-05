@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *decks;
 @property (strong, nonatomic) Deck *selectedDeck;
 @property (strong, nonatomic) NSManagedObjectContext *databaseContext;
+
 @end
 
 @implementation FCDeckCollectionViewController

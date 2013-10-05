@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @protocol FCRenderViewControllerDelegate
--(void) didCollectFront:(NSString *)front andDidCollectBack:(NSString *)back;
+
+@required
+-(void) didCollectFrontPath:(NSString *)front
+								andBackPath:(NSString *)back;
+
 @end
 
 

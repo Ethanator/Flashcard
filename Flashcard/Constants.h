@@ -21,6 +21,9 @@
 #define OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE @"Please choose a flashcard deck for your card."
 #define OK_BUTTON_TITLE @"OK"
 #define CARD_TO_RENDER_SEGUE_IDENTIFIER @"ShowRenderViewController"
+#define CROP_RECT_WIDTH (170)
+#define CROP_RECT_HEIGHT (150)
+#define RECT_IMAGE_NAME @"rect.png"
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
@@ -33,13 +36,13 @@
 #define ADD_CARD_OTHER_BUTTON_TITLES @"Text", @"Web", @"Camera", nil
 
 // below are titles for buttons for prompting for text input
-#define PROMPT_FOR_TEXT_TITLE @"Text Input"
-#define PROMPT_FOR_TEXT_MESSAGE @"Please type in the text on the flashcard:"
+#define PROMPT_FOR_TEXT_TITLE @"Text on flashcard"
+#define PROMPT_FOR_TEXT_MESSAGE nil
 #define PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE @"Cancel"
 #define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES @"Done", nil
 
 // below are for text rendering
-#define RENDERED_TEXT_SIZE 12.0f
+#define RENDERED_TEXT_SIZE 26.0f
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
