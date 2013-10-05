@@ -57,13 +57,16 @@
 	return [self.decks count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
-	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
-        NSInteger deckIndex = indexPath.row;
-        return self.decks[deckIndex];
-	}
-    return cell;
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FCDeckCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
+	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]])
+	{
+		NSInteger deckIndex = indexPath.row;
+		Deck* deck = self.decks[deckIndex];
+		cell.deckName.text = deck.name;
+		}
+	return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
