@@ -192,7 +192,7 @@
 	
 	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"tempImage.png"]];
 
-	//	NSLog((@"pre writing to file"));
+		NSLog((@"pre writing to file"));
 	if (![imageData writeToFile:imagePath atomically:NO])
 	{
 		NSLog((@"Failed to cache image data to disk"));
@@ -240,20 +240,49 @@
 // method to handle image case
 - (void)cameraButtonTapped:(id)sender
 {
-	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
-									message:nil
-								   delegate:self
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil] show];
-		return;
-	}
-	picker.delegate = self;
-	[self presentViewController:picker animated:YES completion:nil];
+	
+	[self startCameraControllerFromViewController:self
+																	usingDelegate:self];
+	
+//	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+//	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//	} else {
+//		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
+//									message:nil
+//								   delegate:self
+//						  cancelButtonTitle:@"OK"
+//						  otherButtonTitles:nil] show];
+//		return;
+//	}
+//	picker.delegate = self;
+//	[self presentViewController:picker animated:YES completion:nil];
 }
+
+- (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
+																	 usingDelegate: (id <UIImagePickerControllerDelegate,
+																									 UINavigationControllerDelegate>) delegate {
+	
+	if (([UIImagePickerController isSourceTypeAvailable:
+				UIImagePickerControllerSourceTypeCamera] == NO)
+			|| (delegate == nil)
+			|| (controller == nil))
+		return NO;
+	
+	
+	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+	cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+		
+	// Hides the controls for moving & scaling pictures, or for
+	// trimming movies. To instead show the controls, use YES.
+	cameraUI.allowsEditing = NO;
+	
+	cameraUI.delegate = delegate;
+	
+	[controller presentViewController:cameraUI animated:YES completion:nil];
+	return YES;
+}
+
 
 // method to handle text case
 - (void)renderText {
@@ -335,9 +364,10 @@
 	card.deck = self.deck;
 	card.index = [NSNumber numberWithInt:[self.deck.cards count] + 1];
 	
-	[self.collectionView reloadData];
-	// Save
-	
+	NSError *error;
+	if (![self.deck.managedObjectContext save:&error]) {
+		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+	}
 	
 	[self.collectionView reloadData];
 
