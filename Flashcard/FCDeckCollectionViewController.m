@@ -48,6 +48,11 @@
 	[super viewDidAppear:animated];
 }
 
+-(void)viewDidLayoutSubviews
+{
+	[super viewDidLayoutSubviews];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -187,9 +192,7 @@
 																 message:nil delegate:nil
 											 cancelButtonTitle:OK_BUTTON_TITLE
 											 otherButtonTitles: nil] show];
-		 
-		 [self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
-	 }
+		}
 	
 	[self.collectionView reloadData];
     
