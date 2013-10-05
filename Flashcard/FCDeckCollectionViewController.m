@@ -15,7 +15,7 @@
 
 @interface FCDeckCollectionViewController ()
 
-@property (strong, nonatomic) NSArray *decks;
+@property (strong, nonatomic) NSMutableArray *decks;
 @property (strong, nonatomic) Deck *selectedDeck;
 @property (strong, nonatomic) NSManagedObjectContext *databaseContext;
 
@@ -37,6 +37,7 @@
 
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
 }
 
 -(void)appIntoForeground
@@ -185,12 +186,8 @@
 	
 	NSError * error;
     if (!DEBUG) {
-        self.decks = [self.databaseContext executeFetchRequest:request error:&error];
-        // Sort the self.decks
-        NSSortDescriptor *sortByIndex = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
-        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByIndex];
-        NSArray *sortedArray = [self.decks sortedArrayUsingDescriptors:sortDescriptors];
-        self.decks = sortedArray;
+        NSSortDescriptor *aSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+        [self.decks sortUsingDescriptors:[NSArray arrayWithObject:aSortDescriptor]];
     } else {
         Deck *deck1 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
                                                     inManagedObjectContext:self.databaseContext];
@@ -198,7 +195,9 @@
                                                     inManagedObjectContext:self.databaseContext];
         Deck *deck3 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
                         inManagedObjectContext:self.databaseContext];
-        self.decks = @[deck1, deck2, deck3];
+        [self.decks addObject:deck1];
+        [self.decks addObject:deck2];
+        [self.decks addObject:deck3];
     }
 	
 	
@@ -215,7 +214,11 @@
 	[self.collectionView reloadData];
 	
 }
-
+- (IBAction)addNewDeck:(id)sender {
+    Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
+                                                  inManagedObjectContext:self.databaseContext];
+    [self.decks addObject:newDeck];
+}
 
 
 @end
