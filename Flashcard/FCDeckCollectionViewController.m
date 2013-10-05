@@ -105,6 +105,12 @@
 		cell.deckName.text = deck.name;
         cell.deckImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:((Card *)[deck.cards anyObject]).frontImagePath]];
     }
+	
+	// appearance
+	CGColorRef border = CELL_BORDER_COLOR.CGColor;
+	cell.layer.borderColor = border;
+	cell.layer.borderWidth = CELL_BORDER_WIDTH;
+	
 	return cell;
 }
 
@@ -315,6 +321,13 @@
 }
 
 #pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+						layout:(UICollectionViewLayout*)collectionViewLayout
+		insetForSectionAtIndex:(NSInteger)section
+{
+	return UIEdgeInsetsMake(5, 5, 5, 5);
+}
 
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"will begin drag");

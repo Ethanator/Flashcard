@@ -236,6 +236,7 @@ newY,
 																					 self.frontImageView.frame.size.height / 2);
 	}];
 	
+	
 }
 
 //got this method from apple's website:

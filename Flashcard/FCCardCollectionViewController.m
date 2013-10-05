@@ -31,7 +31,6 @@
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
-
 @end
 
 @implementation FCCardCollectionViewController
@@ -76,6 +75,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.navigationItem.title = self.deck.name;
+	
 
 }
 
@@ -128,6 +128,11 @@
 			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.backImagePath];
 		}
 	}
+	
+	// appearance
+	CGColorRef border = CELL_BORDER_COLOR.CGColor;
+	cell.layer.borderColor = border;
+	cell.layer.borderWidth = CELL_BORDER_WIDTH;
 	
 	return cell;
 }
@@ -397,6 +402,14 @@
 	
 	[self.collectionView reloadData];
 
+}
+
+// methods to set the appearance
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+						layout:(UICollectionViewLayout*)collectionViewLayout
+		insetForSectionAtIndex:(NSInteger)section
+{
+	return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 
