@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSURL *resourceURL;
 
+@property (nonatomic) NSInteger cardUniqueIDCounter;
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 
 // methods to handle different types of inputs
@@ -155,9 +157,12 @@
 	[capturedimage fixOrientation];
 	
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
-	[imageData writeToURL:self.resourceURL atomically:YES];
 	
-	[self performSegueWithIdentifier:<#(NSString *)#> sender:<#(id)#>]
+//	self.resourceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%d%d.png", , ]];
+	
+	[imageData writeToURL:self.resourceURL atomically:YES];
+
+	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 	
 	
 	// push imageData to RenderViewController
@@ -237,7 +242,7 @@
 		case 2:
 			// done
 			// TO-DO: render text into image
-			NSString *textToRender = [alertView ]
+//			NSString *textToRender = [alertView ]
 			
 			// TO-DO: send image to render
 			
