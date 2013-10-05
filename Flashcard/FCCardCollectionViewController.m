@@ -416,6 +416,40 @@
 	}
 	
 	[self.collectionView reloadData];
+	
+	NSInteger cardIndex = [card.index integerValue];
+	
+	// find the card in deck
+	Card *cardToBeChanged = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
+		Card *cardInDeck = (Card *)obj;
+		NSInteger indexOfCardInDeck = [cardInDeck.index doubleValue];
+		BOOL r = (cardIndex == indexOfCardInDeck);
+		return r;
+	}] anyObject];
+	
+	// change the model
+	cardToBeChanged.frontUp = [NSNumber numberWithBool:![cardToBeChanged.frontUp boolValue]];
+	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cardIndex inSection:1];
+	
+	// update the view
+	FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+	
+	[UIView transitionWithView:viewCell.cardView
+					  duration:FLIPPING_ANIMATION_DURATION
+					   options:UIViewAnimationOptionTransitionFlipFromLeft
+					animations:^{
+						if ([cardToBeChanged.frontUp boolValue]) {
+							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+							NSLog(@"Front image path:%@", cardToBeChanged.frontImagePath);
+						} else {
+							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+							
+							NSLog(@"Back image path:%@", cardToBeChanged.backImagePath);
+						}
+					} completion:NULL];
+
+	
 
 }
 
