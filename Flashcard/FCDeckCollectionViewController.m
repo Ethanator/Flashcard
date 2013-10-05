@@ -175,6 +175,7 @@
         self.decks = @[deck1, deck2, deck3];
     }
 	[self.collectionView reloadData];
+    
 }
 
 -(void)firstTimeDeckInsert
