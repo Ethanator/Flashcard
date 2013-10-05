@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Constants.h"
+#import "LXReorderableCollectionViewFlowLayout.h"
 
-@interface FCDeckCollectionViewController : UICollectionViewController
+@interface FCDeckCollectionViewController : UICollectionViewController <LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout>
 
 
 @end

@@ -9,6 +9,7 @@
 #import "FCDeckCollectionViewController.h"
 #import "FCDeckCollectionViewCell.h"
 #import "FCCardCollectionViewController.h"
+#import "LXReorderableCollectionViewFlowLayout.h"
 #import "Deck.h"
 #import "Card.h"
 #import <CoreData/CoreData.h>
@@ -37,6 +38,13 @@
 
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.collectionView.delegate = self;
+    
+    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Rename"
+                                                      action:@selector(customAction:)];
+    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
+    
+    [self.collectionView registerClass:[FCDeckCollectionViewCell class] forCellWithReuseIdentifier:@"MY_CELL"];
 }
 
 -(void)appIntoForeground
@@ -252,9 +260,8 @@
 -(BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
 	if (action == @selector(cut:))
-	{
-		return YES;
-	} else return NO;
+        return YES;
+    else return NO;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
@@ -269,7 +276,64 @@
 	}
 }
 
+#pragma mark - UIMenuController required methods
+- (BOOL)canBecomeFirstResponder {
+    // NOTE: This menu item will not show if this is not YES!
+    return YES;
+}
 
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    NSLog(@"canPerformAction");
+    // The selector(s) should match your UIMenuItem selector
+    if (action == @selector(customAction:)) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - Custom Action(s)
+- (void)customAction:(id)sender {
+    NSLog(@"custom action! %@", sender);
+}
+
+
+#pragma mark - LXReorderableCollectionViewDataSource methods
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    Deck *currDeck = [self.decks objectAtIndex:fromIndexPath.item];
+    
+    [self.decks removeObjectAtIndex:fromIndexPath.item];
+    [self.decks insertObject:currDeck atIndex:toIndexPath.item];
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
+#if LX_LIMITED_MOVEMENT == 1
+#else
+    return YES;
+#endif
+}
+
+#pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"will begin drag");
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"did begin drag");
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"will end drag");
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"did end drag");
+}
 
 
 @end

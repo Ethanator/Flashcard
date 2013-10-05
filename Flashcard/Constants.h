@@ -60,5 +60,6 @@
 #define ALERT_VIEW_MESSAGE @"Please enter the name of the deck."
 #define ALERT_VIEW_CANCEL_BUTTON @"Cancel"
 #define ALERT_VIEW_OTHER_BUTTON @"OK",nil
+#define LX_LIMITED_MOVEMENT 0
 
 #endif
