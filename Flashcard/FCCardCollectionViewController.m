@@ -65,7 +65,7 @@
 			return r;
 		}] anyObject];
 		
-		// displaying image
+		// displaying image on UIImageView
 		if ([cardToBeDisplayed.frontUp boolValue]) {
 			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
 		} else {
@@ -77,6 +77,28 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	
+	NSInteger cardIndex = indexPath.row;
+	
+	// find the card in deck
+	Card *cardToBeChanged = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
+		Card *cardInDeck = (Card *)obj;
+		NSInteger indexOfCardInDeck = [cardInDeck.index doubleValue];
+		BOOL r = (cardIndex == indexOfCardInDeck);
+		return r;
+	}] anyObject];
+	
+	// change the model
+	cardToBeChanged.frontUp = [NSNumber numberWithBool:![cardToBeChanged.frontUp boolValue]];
+	
+	// update the view
+	FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+	
+	if ([cardToBeChanged.frontUp boolValue]) {
+		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+	} else {
+		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+	}
 	
 }
 
