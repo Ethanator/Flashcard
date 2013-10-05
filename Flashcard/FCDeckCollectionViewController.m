@@ -14,7 +14,7 @@
 #import "Card.h"
 #import <CoreData/CoreData.h>
 
-@interface FCDeckCollectionViewController ()
+@interface FCDeckCollectionViewController () <MyMenuDelegate>
 
 @property (strong, nonatomic) NSMutableArray *decks;
 @property (strong, nonatomic) Deck *selectedDeck;
@@ -35,16 +35,19 @@
 
 - (void)viewDidLoad
 {
-
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.collectionView.delegate = self;
-    
     UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Rename"
-                                                      action:@selector(customAction:)];
+                                                     action:@selector(customAction:)];
     [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
     
-    [self.collectionView registerClass:[FCDeckCollectionViewCell class] forCellWithReuseIdentifier:@"MY_CELL"];
+}
+
+-(void)changeNameOfCell:(FCDeckCollectionViewCell*) cell name:(NSString *)name
+{
+    [self.decks[cell.index] setName:name];
+    [self.collectionView reloadData];
 }
 
 -(void)appIntoForeground
@@ -98,6 +101,7 @@
 	{
 		NSInteger deckIndex = indexPath.row;
 		Deck* deck = self.decks[deckIndex];
+        cell.index = deckIndex;
 		cell.deckName.text = deck.name;
         cell.deckImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:((Card *)[deck.cards anyObject]).frontImagePath]];
     }
@@ -241,7 +245,7 @@
 
 }
 
-// Create a new deck based on the information passed by the alert view
+// This alert view prompts the user to type in the name of the deck to be created
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
@@ -262,14 +266,21 @@
 
 -(BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-	if (action == @selector(cut:))
+    if (action == @selector(customAction:) || action == @selector(cut:)) {
         return YES;
-    else return NO;
+    }
+    return NO;
 }
+
+#pragma mark - Custom Action(s)
+- (void)customAction:(id)sender {
+    NSLog(@"RR");
+}
+
 
 -(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-	if (action == @selector(cut:))
+    if (action == @selector(cut:))
 	{
 		int itemIndex = [indexPath indexAtPosition:1];
 		Deck * deckToBeDeleted = self.decks[itemIndex];
@@ -279,26 +290,9 @@
 	}
 }
 
-#pragma mark - UIMenuController required methods
-- (BOOL)canBecomeFirstResponder {
-    // NOTE: This menu item will not show if this is not YES!
+-(BOOL)canBecomeFirstResponder {
     return YES;
 }
-
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    NSLog(@"canPerformAction");
-    // The selector(s) should match your UIMenuItem selector
-    if (action == @selector(customAction:)) {
-        return YES;
-    }
-    return NO;
-}
-
-#pragma mark - Custom Action(s)
-- (void)customAction:(id)sender {
-    NSLog(@"custom action! %@", sender);
-}
-
 
 #pragma mark - LXReorderableCollectionViewDataSource methods
 

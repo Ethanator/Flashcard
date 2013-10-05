@@ -159,11 +159,11 @@
 				2C5484A117FFB64700F13C12 /* Constants.h */,
 				2C5484A217FFBC0700F13C12 /* Other View Subclasses */,
 				2C5484A017FFB23F00F13C12 /* View Controller Subclasses */,
-				2C54849F17FFB23100F13C12 /* Data */,
 				2C54846717FFA0BE00F13C12 /* FCAppDelegate.h */,
 				2C54846817FFA0BE00F13C12 /* FCAppDelegate.m */,
 				2C54846A17FFA0BE00F13C12 /* Main.storyboard */,
 				2C54847017FFA0BE00F13C12 /* Images.xcassets */,
+				2C54849F17FFB23100F13C12 /* Data */,
 				2C54845F17FFA0BE00F13C12 /* Supporting Files */,
 			);
 			path = Flashcard;

@@ -7,6 +7,9 @@
 //
 
 #import "FCDeckCollectionViewCell.h"
+#import "FCDeckCollectionViewController.h"
+#import "Constants.h"
+#import "Deck.h"
 
 @implementation FCDeckCollectionViewCell
 
@@ -28,5 +31,25 @@
 }
 */
 
+- (void)customAction:(id)sender {
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:ALERT_VIEW_RENAME_FILE
+                                                        message:ALERT_VIEW_MESSAGE
+                                                       delegate:self
+                                              cancelButtonTitle:ALERT_VIEW_CANCEL_BUTTON
+                                              otherButtonTitles:ALERT_VIEW_OTHER_BUTTON];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+
+}
+
+// This alert view prompts the user to type in the name of the deck to be created
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        [(FCDeckCollectionViewController*)[(UICollectionView*)self.superview delegate] changeNameOfCell:self name:name];
+    }
+}
 
 @end
