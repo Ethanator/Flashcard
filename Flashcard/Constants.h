@@ -35,7 +35,7 @@
 #define PROMPT_FOR_TEXT_TITLE @"Text Input"
 #define PROMPT_FOR_TEXT_MESSAGE @"Please type in the text on the flashcard:"
 #define PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE @"Cancel"
-#define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES nil
+#define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES @"Done", nil
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
