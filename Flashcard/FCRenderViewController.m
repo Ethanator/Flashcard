@@ -184,9 +184,9 @@ newY,
 	self.backImageView.image = self.backImage;
 	[self.view addSubview:self.backImageView];
 	
-	[UIView animateWithDuration:2.0 animations:^(void){
+	[UIView animateWithDuration:1.5 animations:^(void){
 		//animate that view to the top right
-		self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.backImageView.frame.size.width / 2, self.backImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
+		self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width, self.backImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
 		self.backImageView.frame = CGRectMake(self.backImageView.frame.origin.x,
 																					self.backImageView.frame.origin.y,
 																					self.backImageView.frame.size.width / 2,
@@ -237,7 +237,7 @@ newY,
 	
 	self.frontImageView.center = self.cropRectImageView.center;
 
-	[UIView animateWithDuration:2.0 animations:^(void){
+	[UIView animateWithDuration:1.5 animations:^(void){
 		self.frontImageView.center = CGPointMake(self.frontImageView.frame.size.width / 2, self.frontImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
 		self.frontImageView.frame = CGRectMake(self.frontImageView.frame.origin.x,
 																					 self.frontImageView.frame.origin.y,

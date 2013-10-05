@@ -227,6 +227,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kDh-KE-Oiy">
+                                <rect key="frame" x="141" y="222" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0x-GC-RSg">
                                 <rect key="frame" x="215" y="420" width="85" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -254,6 +258,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="iw7-YB-7Tx"/>
                     <connections>
+                        <outlet property="spinner" destination="kDh-KE-Oiy" id="GlO-SH-0y7"/>
                         <outlet property="videoPreviewLayer" destination="cCz-Ji-GkW" id="52E-bk-sJd"/>
                     </connections>
                 </viewController>

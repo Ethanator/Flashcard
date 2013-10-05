@@ -15,6 +15,7 @@
 @property (nonatomic, strong) AVCaptureDevice * videoCaptureDevice;
 @property (weak, nonatomic) IBOutlet UIView *videoPreviewLayer;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property BOOL captureNextImage;
 
 @end
@@ -151,6 +152,9 @@
 // Create a UIImage from sample buffer data
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer
 {
+	[self.spinner startAnimating];
+	
+	
 	// Get a CMSampleBuffer's Core Video image buffer for the media data
 	CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 	// Lock the base address of the pixel buffer
@@ -185,6 +189,7 @@
 	
 	// Release the Quartz image
 	CGImageRelease(quartzImage);
+	[self.spinner stopAnimating];
 	
 	return (image);
 }

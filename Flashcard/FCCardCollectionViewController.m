@@ -430,7 +430,7 @@
 			return;
 		} else if (buttonIndex == 1) {
 			NSString *fileURL = [alertView textFieldAtIndex:0].text;
-			self.resourceURL = [NSURL fileURLWithPath:fileURL];
+			self.resourceURL = [NSURL URLWithString:fileURL];
 			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 		}
 	}
