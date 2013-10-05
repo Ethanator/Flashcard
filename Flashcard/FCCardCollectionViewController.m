@@ -7,9 +7,10 @@
 //
 
 #import "FCCardCollectionViewController.h"
-#import "FCDeckCollectionViewCell.h"
+#import "FCCardCollectionViewCell.h"
 #import "Deck.h"
 #import "Card.h"
+#import "Constants.h"
 
 @interface FCCardCollectionViewController ()
 
@@ -48,11 +49,11 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-	UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Card" forIndexPath:indexPath];
-	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
-		FCDeckCollectionViewCell *viewCell = (FCDeckCollectionViewCell *)cell;
+	UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CARD_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
+	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
+		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
 		
-		// setup of each view cell
+		// setup of *viewcell
 	}
 	
 	return cell;

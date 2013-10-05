@@ -12,4 +12,7 @@
 /* SEANS CONSTANTS */
 #define FLASHCARD_DATA_MODEL_NAME @"FlashcardDataModel"
 
+/* SHUYANGS CONSTANTS */
+#define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
+
 #endif

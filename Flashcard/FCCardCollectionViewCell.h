@@ -1,5 +1,5 @@
 //
-//  FCDeckCollectionViewCell.h
+//  FCCardCollectionViewCell.h
 //  Flashcard
 //
 //  Created by Shuyang Li on 10/4/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FCDeckCollectionViewCell : UICollectionViewCell
+@interface FCCardCollectionViewCell : UICollectionViewCell
 
 @end
