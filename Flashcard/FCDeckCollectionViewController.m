@@ -8,11 +8,13 @@
 
 #import "FCDeckCollectionViewController.h"
 #import "FCDeckCollectionViewCell.h"
+#import "FCCardCollectionViewController.h"
 #import "Deck.h"
 
 @interface FCDeckCollectionViewController ()
 
 @property (strong, nonatomic) NSArray *decks;
+@property (strong, nonatomic) Deck *selectedDeck;
 
 @end
 
@@ -60,12 +62,27 @@
 		FCDeckCollectionViewCell *viewCell = (FCDeckCollectionViewCell *)cell;
         
         
-        
 	}
 	
 	return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // Save the index of the selected deck
+    // Have a private property that is the selected item
+    self.selectedDeck = self.decks[indexPath.row];
+    [self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
+    // Perform segue, identify the segue, in the segue set Shuyang's public variables
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:DECK_TO_CARD_SEGUE_IDENTIFIER]) {
+        FCCardCollectionViewController *viewController = segue.destinationViewController;
+        viewController.deck = self.selectedDeck;
+    }
+    [super prepareForSegue:segue sender:sender];
+}
 
 - (void)pullCoreData {
 	
@@ -133,10 +150,18 @@
 	// fetch the decks, store them to array
 	
 	NSError * error;
-	self.decks = [databaseContext executeFetchRequest:request error:&error];
-	
-	[self.collectionView reloadData];
-}
+    if (!DEBUG) self.decks = [databaseContext executeFetchRequest:request error:&error];
+    else {
+        Deck *deck1 = [[Deck alloc] init];
+        Deck *deck2 = [[Deck alloc] init];
+        Deck *deck3 = [[Deck alloc] init];
+        deck1.name = @"Ethan"; deck1.index = [NSNumber numberWithInt:0];
+        deck2.name = @"Sean"; deck2.index = [NSNumber numberWithInt:1];
+        deck3.name = @"Shuyang"; deck3.index = [NSNumber numberWithInt:2];
+        
+        self.decks = @[deck1, deck2, deck3];
+    }
+	[self.collectionView reloadData];}
 
 -(void)firstTimeDeckInsert
 {

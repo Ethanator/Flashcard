@@ -10,7 +10,7 @@
 #define Flashcard_Constants_h
 
 // USE THIS AS NEEDED - comment below what it does in case somebody else is using it
-#define DEBUG NO
+#define DEBUG YES
 
 
 /* SEANS CONSTANTS */
@@ -22,5 +22,6 @@
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
+#define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
 
 #endif
