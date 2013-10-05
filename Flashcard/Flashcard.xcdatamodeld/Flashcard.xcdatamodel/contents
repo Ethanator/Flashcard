@@ -3,6 +3,7 @@
     <entity name="Card" representedClassName="Card" syncable="YES">
         <attribute name="backImagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="frontImagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="frontUp" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="deck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Deck" inverseName="cards" inverseEntity="Deck" syncable="YES"/>
@@ -14,6 +15,6 @@
     </entity>
     <elements>
         <element name="Deck" positionX="2140" positionY="-1635" width="101" height="88"/>
-        <element name="Card" positionX="2374" positionY="-1665" width="119" height="118"/>
+        <element name="Card" positionX="2374" positionY="-1665" width="119" height="133"/>
     </elements>
 </model>

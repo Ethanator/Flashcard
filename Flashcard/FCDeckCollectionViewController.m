@@ -44,7 +44,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (void)pullCoreData {
 	
 	//start the activity indicator
@@ -111,48 +110,15 @@
 	// fetch the decks, store them to array
 	
 	NSError * error;
-	NSArray * deckArray = [databaseContext executeFetchRequest:request error:&error];
+	self.decks = [databaseContext executeFetchRequest:request error:&error];
 	
-	NSMutableArray * tempImageArray = [[NSMutableArray alloc] init];
-	
-	for (Deck * deckObject in savedPhotoObjectsArray)
-	{
-    [tempImageArray addObject:photoObject];
-	}
-	self.imageArray = [tempImageArray copy];
 	[self.collectionView reloadData];
 }
 
 -(void)firstTimeDeckInsert
 {
 	//Put in a filler Deck because this is the first time the user has opened the app
-	
-	UIImage * capturedimage = [UIImage imageNamed:@"fillerImage.png"];
-	
-	capturedimage = [self fixOrientation:capturedimage];
-	
-	NSData *imageData = UIImagePNGRepresentation(capturedimage);
-	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",[self.imageArray count]+1]];
-	
-	//	NSLog((@"pre writing to file"));
-	if (![imageData writeToFile:imagePath atomically:NO])
-	{
-		//    NSLog((@"Failed to cache image data to disk"));
-	}
-	else
-	{
-		//    NSLog(@"the cachedImagedPath is %@",imagePath);
-		TDMPhoto* photo = [self savePhotoWithPath:imagePath];
-		NSMutableArray* tempImageArray = [self.imageArray mutableCopy];
-		[tempImageArray  addObject:photo];
-		self.imageArray = [tempImageArray copy];
-		
-	}
-	
+#warning filler deck for first time opening.
 	[self.collectionView reloadData];
 	
 }

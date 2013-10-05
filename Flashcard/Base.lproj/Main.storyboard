@@ -42,7 +42,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UcU-45-co1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="169"/>
+            <point key="canvasLocation" x="269" y="169"/>
         </scene>
         <!--Render View Controller-->
         <scene sceneID="EX5-Hn-EBE">
@@ -76,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhE-51-EmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="169"/>
+            <point key="canvasLocation" x="1173" y="169"/>
         </scene>
         <!--Card Collection View Controller - Title-->
         <scene sceneID="gUQ-dU-HZJ">
@@ -146,7 +146,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TqS-2y-bbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-77" y="169"/>
+            <point key="canvasLocation" x="-167" y="169"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
