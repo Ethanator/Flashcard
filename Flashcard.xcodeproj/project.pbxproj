@@ -67,6 +67,7 @@
 		2C54849A17FFB22800F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		2C54849C17FFB22900F13C12 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
 		2C54849D17FFB22900F13C12 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		2C5484A117FFB64700F13C12 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +127,7 @@
 		2C54845E17FFA0BE00F13C12 /* Flashcard */ = {
 			isa = PBXGroup;
 			children = (
+				2C5484A117FFB64700F13C12 /* Constants.h */,
 				2C5484A017FFB23F00F13C12 /* View Subclasses */,
 				2C54849F17FFB23100F13C12 /* Data */,
 				2C54846717FFA0BE00F13C12 /* FCAppDelegate.h */,
