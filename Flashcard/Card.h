@@ -14,7 +14,7 @@
 @interface Card : NSManagedObject
 
 @property (nonatomic, retain) NSString * backImagePath;
-@property (nonatomic, retain) NSDecimalNumber * index;
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * frontImagePath;
 @property (nonatomic, retain) NSNumber * frontUp;

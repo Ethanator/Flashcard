@@ -14,7 +14,7 @@
 @interface Deck : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSDecimalNumber * index;
+@property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSSet *cards;
 @end
 
