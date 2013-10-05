@@ -188,6 +188,8 @@
 	self.decks = [[NSMutableArray alloc]init];
 
     if (!DEBUG) {
+			
+			self.decks = [[self.databaseContext executeFetchRequest:request error:&error] mutableCopy];
         NSSortDescriptor *aSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
         [self.decks sortUsingDescriptors:[NSArray arrayWithObject:aSortDescriptor]];
     } else {
