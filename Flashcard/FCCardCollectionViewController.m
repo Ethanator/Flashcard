@@ -18,8 +18,6 @@
 
 @property (nonatomic, strong) NSURL *resourceURL;
 
-@property (nonatomic) NSInteger cardUniqueIDCounter;
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 
 // methods to handle different types of inputs
@@ -158,7 +156,16 @@
 	
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
 	
-//	self.resourceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%d%d.png", , ]];
+	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	if (cardUniqueIDCounter) {
+		cardUniqueIDCounter++;
+	} else {
+		cardUniqueIDCounter = 0;
+	}
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	self.resourceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%d.png", cardUniqueIDCounter]];
 	
 	[imageData writeToURL:self.resourceURL atomically:YES];
 
