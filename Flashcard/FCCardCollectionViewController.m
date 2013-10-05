@@ -56,13 +56,8 @@
 		// IS IT ANYOBJECT?
 		Card *cardToBeDisplayed = [self.deck.cards anyObject];
 		
-		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.]
+		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
 	}
-	
-	return cell;
-	
-	
-	cell.headImageView.image = [UIImage imageWithContentsOfFile:photo.imagePath];//[UIImage imageNamed:@"helmet.jpg"];
 	
 	return cell;
 }
