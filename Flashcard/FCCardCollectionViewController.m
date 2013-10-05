@@ -11,9 +11,12 @@
 #import "Deck.h"
 #import "Card.h"
 #import "UIImage+cameraOrientationFix.h"
+#import "FCRenderViewController.h"
 #import "Constants.h"
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) NSURL *resourceURL;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 
@@ -21,6 +24,8 @@
 - (void)renderText;
 - (void)cameraButtonTapped:(id)sender;
 
+// methods to handle UIAlertView actions, coming from UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
 
 @end
@@ -40,6 +45,26 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
+	{
+		self.resourceURL = [[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
+		[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
+	}
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:CARD_TO_RENDER_SEGUE_IDENTIFIER])
+	{
+		FCRenderViewController* renderVC = segue.destinationViewController;
+	}
+	[super prepareForSegue:segue sender:sender];
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,6 +156,22 @@
 	
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
 	
+	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	if (cardUniqueIDCounter) {
+		cardUniqueIDCounter++;
+	} else {
+		cardUniqueIDCounter = 0;
+	}
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	self.resourceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%d.png", cardUniqueIDCounter]];
+	
+	[imageData writeToURL:self.resourceURL atomically:YES];
+
+	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
+	
+	
 	// push imageData to RenderViewController
 	
 	[self.collectionView reloadData];
@@ -194,8 +235,30 @@
 													  cancelButtonTitle:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE
 													  otherButtonTitles:PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES];
 	promptForTextView.alertViewStyle = UIAlertViewStylePlainTextInput;
-	
+	[promptForTextView show];
 }
+
+
+// method to handle UIAlertView action
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch (buttonIndex) {
+		case 1:
+			// cancel
+			break;
+			
+		case 2:
+			// done
+			// TO-DO: render text into image
+//			NSString *textToRender = [alertView ]
+			
+			// TO-DO: send image to render
+			
+			
+		default:
+			break;
+	}
+}
+
 
 
 @end

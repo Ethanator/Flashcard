@@ -18,9 +18,14 @@
 #define DECK_ENTITY_NAME @"Deck"
 #define CARD_ENTITY_NAME @"Card"
 #define EXTERNALLY_OPENED_URL_DEFAULTS @"externallyOpenedURL"
+#define OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE @"Please choose a flashcard deck for your card:"
+#define OK_BUTTON_TITLE @"OK"
+#define CARD_TO_RENDER_SEGUE_IDENTIFIER @"ShowRenderViewController"
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"
+#define KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS @"CounterForImageUniqueID"
+
 
 // below are titles for buttons for adding a new card
 #define ADD_CARD_ACTION_SHEET_TITLE nil
@@ -32,7 +37,7 @@
 #define PROMPT_FOR_TEXT_TITLE @"Text Input"
 #define PROMPT_FOR_TEXT_MESSAGE @"Please type in the text on the flashcard:"
 #define PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE @"Cancel"
-#define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES nil
+#define PROMPT_FOR_TEXT_OTHER_BUTTON_TITLES @"Done", nil
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
