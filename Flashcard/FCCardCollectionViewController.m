@@ -145,7 +145,7 @@
 	[capturedimage fixOrientation];
 	
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
-	
+	[imageData writeToURL:<#(NSURL *)#> atomically:<#(BOOL)#>];
 	
 	
 	// push imageData to RenderViewController
