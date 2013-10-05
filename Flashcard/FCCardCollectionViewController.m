@@ -400,7 +400,7 @@
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
 						
-			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 500px; height: 500px; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
+			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 500px; height: auto; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
