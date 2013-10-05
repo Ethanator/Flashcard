@@ -10,6 +10,7 @@
 #import "FCCardCollectionViewCell.h"
 #import "Deck.h"
 #import "Card.h"
+#import "UIImage+cameraOrientationFix.h"
 #import "Constants.h"
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -132,6 +133,24 @@
 	picker.delegate = self;
 	[self presentViewController:picker animated:YES completion:nil];
 }
+
+
+// code below from UIImagePickerControllerDelegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
+	[capturedimage fixOrientation];
+	
+	NSData *imageData = UIImagePNGRepresentation(capturedimage);
+	
+	// push imageData to RenderViewController
+	
+	[self.collectionView reloadData];
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// code above from UIImagePickerControllerDelegate
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

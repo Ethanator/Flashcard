@@ -30,6 +30,7 @@
 		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
+		8899CE8017FFEC8D0034D788 /* UIImage+cameraOrientationFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7F17FFEC8D0034D788 /* UIImage+cameraOrientationFix.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
 		8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCardCollectionViewCell.m; sourceTree = "<group>"; };
+		8899CE7E17FFEC8D0034D788 /* UIImage+cameraOrientationFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+cameraOrientationFix.h"; sourceTree = "<group>"; };
+		8899CE7F17FFEC8D0034D788 /* UIImage+cameraOrientationFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+cameraOrientationFix.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */,
+				8899CE8017FFEC8D0034D788 /* UIImage+cameraOrientationFix.m in Sources */,
 				2C54846517FFA0BE00F13C12 /* main.m in Sources */,
 				2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */,
 				3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */,
