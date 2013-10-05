@@ -166,18 +166,18 @@
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
 	capturedimage = [capturedimage fixOrientation];
 		
-	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	
-	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	
-	[[NSUserDefaults standardUserDefaults] synchronize];
+//	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+//	
+//	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+//	
+//	[[NSUserDefaults standardUserDefaults] synchronize];
 		
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
-	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",cardUniqueIDCounter]];
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"tempImage.png"]];
 
 	//	NSLog((@"pre writing to file"));
 	if (![imageData writeToFile:imagePath atomically:NO])
