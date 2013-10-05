@@ -58,10 +58,10 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
 		FCDeckCollectionViewCell *viewCell = (FCDeckCollectionViewCell *)cell;
-        
+        NSInteger deckIndex = indexPath.row;
         
 	}
 	
@@ -152,8 +152,14 @@
 	// fetch the decks, store them to array
 	
 	NSError * error;
-    if (!DEBUG) self.decks = [databaseContext executeFetchRequest:request error:&error];
-    else {
+    if (!DEBUG) {
+        self.decks = [databaseContext executeFetchRequest:request error:&error];
+        // Sort the self.decks
+        NSSortDescriptor *sortByIndex = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByIndex];
+        NSArray *sortedArray = [self.decks sortedArrayUsingDescriptors:sortDescriptors];
+        self.decks = sortedArray;
+    } else {
         /*Deck *deck1 = [NSEntityDescription ];
         Deck *deck2 = [[Deck alloc] init];
         Deck *deck3 = [[Deck alloc] init];
