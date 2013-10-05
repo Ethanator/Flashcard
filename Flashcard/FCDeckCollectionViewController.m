@@ -28,6 +28,12 @@
 
 - (void)viewDidLoad
 {
+	
+	//pull card decks from core data database
+	/***** REMEMBER THIS IS NOT PERFORMED IN THE MAIN THREAD. DON'T EXPECT THERE TO BE ANY DECKS READY AFTER THIS METHOD *****/
+	//also, this method draws a UIActivityIndicator on top of the view. It also gets rid of it afterward.
+	[self pullCoreData];
+	
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -40,6 +46,49 @@
 
 
 - (void)pullCoreData {
+	
+	//start the activity indicator
+#warning activity indicator
+	
+	//get the bundle documents URL
+	NSURL * documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	
+	//create a managed document from the douments URl and the appended "FlashcardDataModel"
+	UIManagedDocument * databaseDocument = [[UIManagedDocument alloc] initWithFileURL:[documentsURL URLByAppendingPathComponent:FLASHCARD_DATA_MODEL_NAME]];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[documentsURL path]])
+	{
+		[self.databaseDocument openWithCompletionHandler:^(BOOL success) {
+			if (success)
+			{
+				[self.imagesLoadingActivityIndicator stopAnimating];
+				[self documentIsReady];
+			}
+			else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
+																			 message:nil
+																			delegate:self
+														 cancelButtonTitle:nil
+														 otherButtonTitles: nil] show];
+		}];
+	}
+	else
+	{
+		[self.databaseDocument saveToURL:documentsURL
+										forSaveOperation:UIDocumentSaveForCreating
+									 completionHandler:^(BOOL success){
+										 if (success)
+										 {
+											 [self.imagesLoadingActivityIndicator stopAnimating];
+											 [self newDocumentIsReady];
+										 }
+										 else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
+																											message:nil
+																										 delegate:self
+																						cancelButtonTitle:nil
+																						otherButtonTitles: nil] show];
+									 }];
+	}
+
 	
 }
 
