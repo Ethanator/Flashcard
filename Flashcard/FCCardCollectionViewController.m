@@ -111,7 +111,7 @@
 	[actionSheet showInView:self.view];
 }
 
-- (IBAction)cameraButtonTapped:(id)sender
+- (void)cameraButtonTapped:(id)sender
 {
 	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) picker.sourceType = UIImagePickerControllerSourceTypeCamera;
