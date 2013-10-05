@@ -49,10 +49,14 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-	UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CARD_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
+	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CARD_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
 		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
-		Card *cardToBeDisplayed = [self.deck.cards ]
+		
+		// IS IT ANYOBJECT?
+		Card *cardToBeDisplayed = [self.deck.cards anyObject];
+		
+		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.frontImagePath];
 	}
 	
 	return cell;
