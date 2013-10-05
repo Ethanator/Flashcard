@@ -31,6 +31,7 @@
 		2C99EEFE18002439001149CB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C99EEFD18002439001149CB /* rect.png */; };
 		2C99EF0218007D49001149CB /* FCCaptureImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99EF0118007D49001149CB /* FCCaptureImageViewController.m */; };
 		2C99EF0418007E81001149CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C99EF0318007E81001149CB /* AVFoundation.framework */; };
+		2C99EF081800AB3D001149CB /* anycard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C99EF071800AB3D001149CB /* anycard.png */; };
 		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		3F7AEFBA18004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB918004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -86,6 +87,7 @@
 		2C99EF0018007D49001149CB /* FCCaptureImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCaptureImageViewController.h; sourceTree = "<group>"; };
 		2C99EF0118007D49001149CB /* FCCaptureImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCaptureImageViewController.m; sourceTree = "<group>"; };
 		2C99EF0318007E81001149CB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2C99EF071800AB3D001149CB /* anycard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = anycard.png; path = ../anycard.png; sourceTree = "<group>"; };
 		3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
 		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		3F7AEFB818004E44002D6D9A /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		2C54845E17FFA0BE00F13C12 /* Flashcard */ = {
 			isa = PBXGroup;
 			children = (
+				2C99EF071800AB3D001149CB /* anycard.png */,
 				2C99EEFF1800243D001149CB /* img */,
 				2C5484BD17FFF0B400F13C12 /* UIImage+cameraOrientationFix.h */,
 				2C5484BE17FFF0B400F13C12 /* UIImage+cameraOrientationFix.m */,
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C54847117FFA0BE00F13C12 /* Images.xcassets in Resources */,
+				2C99EF081800AB3D001149CB /* anycard.png in Resources */,
 				2C99EEFE18002439001149CB /* rect.png in Resources */,
 				2C54846317FFA0BE00F13C12 /* InfoPlist.strings in Resources */,
 				2C54846C17FFA0BE00F13C12 /* Main.storyboard in Resources */,
