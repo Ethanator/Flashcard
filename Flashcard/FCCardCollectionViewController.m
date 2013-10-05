@@ -53,8 +53,15 @@
 	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
 		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
 		
-		// IS IT ANYOBJECT?
-		Card *cardToBeDisplayed = [self.deck.cards anyObject];
+		NSInteger cardIndex = indexPath.row;
+		
+		Card *cardToBeDisplayed = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
+			
+			Card *cardInDeck = (Card *)obj;
+			NSInteger indexOfCardInDeck = [cardInDeck.index doubleValue];
+			BOOL r = (cardIndex == indexOfCardInDeck);
+			return r;
+		}] anyObject];
 		
 		// displaying image
 		if ([cardToBeDisplayed.frontUp boolValue]) {
