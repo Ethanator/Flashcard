@@ -214,7 +214,7 @@
 		NSLog(@"the cachedImagedPath is %@",imagePath);
 	}
 	
-	self.resourceURL = [NSURL fileURLWithPath:imagePath];
+	self.resourceURL = [NSURL URLWithString:imagePath];
 
 	
 	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];

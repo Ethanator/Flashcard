@@ -55,6 +55,10 @@
 	
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
+	if (DEBUG) {
+		NSLog(@"Unique id number:%d", self.uniqueIdentifierForInstance);
+	}
+	
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -187,6 +191,10 @@ newY,
 																					self.backImageView.frame.size.width / 2,
 																					self.backImageView.frame.size.height / 2);
 	}];
+	
+	if (DEBUG) {
+		NSLog(imagePath);
+	}
 }
 - (IBAction)frontButtonTapped:(UIBarButtonItem *)sender
 {
@@ -236,7 +244,9 @@ newY,
 																					 self.frontImageView.frame.size.height / 2);
 	}];
 	
-	
+	if (DEBUG) {
+		NSLog(imagePath);
+	}
 }
 
 //got this method from apple's website:
