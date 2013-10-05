@@ -4,17 +4,17 @@
         <attribute name="backImagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="frontImagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="frontUp" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="index" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="deck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Deck" inverseName="cards" inverseEntity="Deck" syncable="YES"/>
     </entity>
     <entity name="Deck" representedClassName="Deck" syncable="YES">
-        <attribute name="index" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" defaultValueString="Card Deck" syncable="YES"/>
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="deck" inverseEntity="Card" syncable="YES"/>
     </entity>
     <elements>
         <element name="Deck" positionX="2140" positionY="-1635" width="101" height="88"/>
-        <element name="Card" positionX="2374" positionY="-1665" width="119" height="133"/>
+        <element name="Card" positionX="2374" positionY="-1692" width="119" height="133"/>
     </elements>
 </model>
