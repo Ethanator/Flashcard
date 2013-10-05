@@ -27,10 +27,10 @@
 		2C5484AA17FFCBFB00F13C12 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5484A917FFCBFB00F13C12 /* CoreData.framework */; };
 		2C5484B917FFD7BC00F13C12 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484B817FFD7BC00F13C12 /* Deck.m */; };
 		2C5484BC17FFD7BC00F13C12 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484BB17FFD7BC00F13C12 /* Card.m */; };
+		2C99EEFC17FFF141001149CB /* UIImage+cameraOrientationFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5484BE17FFF0B400F13C12 /* UIImage+cameraOrientationFix.m */; };
 		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
-		8899CE8017FFEC8D0034D788 /* UIImage+cameraOrientationFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7F17FFEC8D0034D788 /* UIImage+cameraOrientationFix.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,12 +74,12 @@
 		2C5484B817FFD7BC00F13C12 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
 		2C5484BA17FFD7BC00F13C12 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		2C5484BB17FFD7BC00F13C12 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		2C5484BD17FFF0B400F13C12 /* UIImage+cameraOrientationFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+cameraOrientationFix.h"; sourceTree = "<group>"; };
+		2C5484BE17FFF0B400F13C12 /* UIImage+cameraOrientationFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+cameraOrientationFix.m"; sourceTree = "<group>"; };
 		3F7AEFB517FFD2F9002D6D9A /* FCDeckCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewCell.h; sourceTree = "<group>"; };
 		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
 		8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCardCollectionViewCell.m; sourceTree = "<group>"; };
-		8899CE7E17FFEC8D0034D788 /* UIImage+cameraOrientationFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+cameraOrientationFix.h"; sourceTree = "<group>"; };
-		8899CE7F17FFEC8D0034D788 /* UIImage+cameraOrientationFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+cameraOrientationFix.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +141,8 @@
 		2C54845E17FFA0BE00F13C12 /* Flashcard */ = {
 			isa = PBXGroup;
 			children = (
+				2C5484BD17FFF0B400F13C12 /* UIImage+cameraOrientationFix.h */,
+				2C5484BE17FFF0B400F13C12 /* UIImage+cameraOrientationFix.m */,
 				2C5484A117FFB64700F13C12 /* Constants.h */,
 				2C5484A217FFBC0700F13C12 /* Other View Subclasses */,
 				2C5484A017FFB23F00F13C12 /* View Controller Subclasses */,
@@ -317,8 +319,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C99EEFC17FFF141001149CB /* UIImage+cameraOrientationFix.m in Sources */,
 				8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */,
-				8899CE8017FFEC8D0034D788 /* UIImage+cameraOrientationFix.m in Sources */,
 				2C54846517FFA0BE00F13C12 /* main.m in Sources */,
 				2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */,
 				3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */,

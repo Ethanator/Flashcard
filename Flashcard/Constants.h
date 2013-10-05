@@ -17,6 +17,7 @@
 #define FLASHCARD_DATA_MODEL_NAME @"FlashcardDataModel"
 #define DECK_ENTITY_NAME @"Deck"
 #define CARD_ENTITY_NAME @"Card"
+#define EXTERNALLY_OPENED_URL_DEFAULTS @"externallyOpenedURL"
 
 /* SHUYANGS CONSTANTS */
 #define CARD_COLLECTION_VIEW_CELL_IDENTIFIER @"Card"

@@ -7,11 +7,15 @@
 //
 
 #import "FCAppDelegate.h"
+#import "Constants.h"
 
 @implementation FCAppDelegate
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+	
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setURL:url forKey:EXTERNALLY_OPENED_URL_DEFAULTS];
 	
 	return YES;
 }

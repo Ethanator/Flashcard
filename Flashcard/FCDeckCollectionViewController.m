@@ -39,6 +39,11 @@
 	//also, this method draws a UIActivityIndicator on top of the view. It also gets rid of it afterward.
 	[self pullCoreData];
 	
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
+	{
+		[self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
+	}
+	
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }

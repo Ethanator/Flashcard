@@ -92,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhE-51-EmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173" y="169"/>
+            <point key="canvasLocation" x="1451" y="169"/>
         </scene>
         <!--Card Collection View Controller - Title-->
         <scene sceneID="gUQ-dU-HZJ">
@@ -151,7 +151,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ui-H6-vmv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="722" y="169"/>
+            <point key="canvasLocation" x="881" y="169"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PIs-MC-sgX">
