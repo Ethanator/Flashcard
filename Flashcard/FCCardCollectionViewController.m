@@ -49,7 +49,10 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
 	 
 																							 name:UIApplicationDidBecomeActiveNotification object:nil];
-    [super viewDidLoad];
+	
+	// NEED TO SET THE TITLE OF THE NAVIGATION BAR TO SELF.DECK.NAME
+	
+	    [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
@@ -325,7 +328,6 @@
 // required method from FCRenderViewControllerDelegate
 - (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
-	// Model
 	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.deck.managedObjectContext];
 	card.frontImagePath = front;
 	card.backImagePath = back;
@@ -333,9 +335,12 @@
 	card.deck = self.deck;
 	card.index = [NSNumber numberWithInt:[self.deck.cards count] + 1];
 	
-	// Save
+	NSError *error;
+	if (![self.deck.managedObjectContext save:&error]) {
+		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+	}
 	
-	
+	[self.collectionView reloadData];
 
 }
 
