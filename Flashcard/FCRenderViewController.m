@@ -45,7 +45,7 @@
     
     self.renderWebView.delegate = self;
 	NSString *testString = @"http://www.google.com";
-    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [self loadURLToWebView];
 	// Do any additional setup after loading the view.
 	
@@ -72,6 +72,7 @@
 	self.cropRectImageView.contentMode = UIViewContentModeScaleAspectFit;
 	UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
 	[self.cropRectImageView addGestureRecognizer:pan];
+	self.cropRectImageView.center = self.renderWebView.center;
 	[self.view addSubview:self.cropRectImageView];
 	self.cropRectImageView.userInteractionEnabled = YES;
 	
