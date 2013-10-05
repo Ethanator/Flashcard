@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UIImageView * frontImageView;
 @property (nonatomic, strong) UIImageView * backImageView;
 
+@property (nonatomic) NSInteger uniqueIdentifierForInstance;
+
 @end
 
 @implementation FCRenderViewController
@@ -46,6 +48,13 @@
 //    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [self loadURLToWebView];
 	// Do any additional setup after loading the view.
+	
+	self.uniqueIdentifierForInstance = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:(self.uniqueIdentifierForInstance + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+	
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -143,16 +152,16 @@ newY,
 	CGImageRelease(imageRef);
 	
 	NSData * imagePNGData = UIImagePNGRepresentation(croppedImage);
-	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	
-	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	
-	[[NSUserDefaults standardUserDefaults] synchronize];
+//	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+//	
+//	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+//	
+//	[[NSUserDefaults standardUserDefaults] synchronize];
 		
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
-	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"backImage%d.png",cardUniqueIDCounter]];
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"backImage%d.png",self.uniqueIdentifierForInstance]];
 	
 	//	NSLog((@"pre writing to file"));
 	if (![imagePNGData writeToFile:imagePath atomically:NO])
@@ -190,16 +199,16 @@ newY,
 	CGImageRelease(imageRef);
 	
 	NSData * imagePNGData = UIImagePNGRepresentation(croppedImage);
-	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	
-	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-	
-	[[NSUserDefaults standardUserDefaults] synchronize];
+//	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+//	
+//	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+//	
+//	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
-	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"frontImage%d.png",cardUniqueIDCounter]];
+	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"frontImage%d.png",self.uniqueIdentifierForInstance]];
 	
 	//	NSLog((@"pre writing to file"));
 	if (![imagePNGData writeToFile:imagePath atomically:NO])
