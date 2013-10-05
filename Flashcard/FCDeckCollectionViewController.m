@@ -180,14 +180,16 @@
     }
 	
 	
-	/*	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
 	 {
-	 
-	 
-	 [self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
+		 
+		 [[[UIAlertView alloc] initWithTitle:OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE
+																 message:nil delegate:nil
+											 cancelButtonTitle:OK_BUTTON_TITLE
+											 otherButtonTitles: nil] show];
+		 
+		 [self performSegueWithIdentifier:DECK_TO_CARD_SEGUE_IDENTIFIER sender:self];
 	 }
-*/
-#warning HHHHHHHHHH
 	
 	[self.collectionView reloadData];
     
