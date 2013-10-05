@@ -185,6 +185,8 @@
 	// fetch the decks, store them to array
 	
 	NSError * error;
+	self.decks = [[NSMutableArray alloc]init];
+
     if (!DEBUG) {
         NSSortDescriptor *aSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
         [self.decks sortUsingDescriptors:[NSArray arrayWithObject:aSortDescriptor]];
@@ -214,10 +216,14 @@
 	[self.collectionView reloadData];
 	
 }
+
 - (IBAction)addNewDeck:(id)sender {
     Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
                                                   inManagedObjectContext:self.databaseContext];
+	newDeck.name = @"Stupid Ethan";
+	
     [self.decks addObject:newDeck];
+	[self.collectionView reloadData];
 }
 
 

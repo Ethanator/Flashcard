@@ -10,7 +10,7 @@
 #define Flashcard_Constants_h
 
 // USE THIS AS NEEDED - comment below what it does in case somebody else is using it
-#define DEBUG YES
+#define DEBUG NO
 
 
 /* SEANS CONSTANTS */
