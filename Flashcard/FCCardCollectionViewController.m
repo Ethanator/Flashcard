@@ -148,7 +148,7 @@
 	
 	[UIView transitionWithView:viewCell.cardView
 					  duration:FLIPPING_ANIMATION_DURATION
-					   options:UIViewAnimationTransitionFlipFromLeft
+					   options:UIViewAnimationOptionTransitionFlipFromLeft 
 					animations:^{
 						if ([cardToBeChanged.frontUp boolValue]) {
 							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
