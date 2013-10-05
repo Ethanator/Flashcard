@@ -34,10 +34,6 @@
 
 - (void)viewDidLoad
 {
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
-	 
-																							 name:UIApplicationWillEnterForegroundNotification object:nil];
 
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
@@ -57,6 +53,9 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
+																							 name:UIApplicationDidBecomeActiveNotification object:nil];
+	
 	//pull card decks from core data database
 	/***** REMEMBER THIS IS NOT PERFORMED IN THE MAIN THREAD. DON'T EXPECT THERE TO BE ANY DECKS READY AFTER THIS METHOD *****/
 	//also, this method draws a UIActivityIndicator on top of the view. It also gets rid of it afterward.
@@ -108,6 +107,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:DECK_TO_CARD_SEGUE_IDENTIFIER]) {
+			[[NSNotificationCenter defaultCenter] removeObserver:self];
         FCCardCollectionViewController *viewController = segue.destinationViewController;
         viewController.deck = self.selectedDeck;
     }
@@ -202,14 +202,7 @@
     }
 	
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
-	 {
-		 
-		 [[[UIAlertView alloc] initWithTitle:OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE
-																 message:nil delegate:nil
-											 cancelButtonTitle:OK_BUTTON_TITLE
-											 otherButtonTitles: nil] show];
-		}
+	[self appIntoForeground];
 	
 	[self.collectionView reloadData];
     
