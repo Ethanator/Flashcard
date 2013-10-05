@@ -260,21 +260,40 @@
 
 // method to handle UIAlertView action
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	switch (buttonIndex) {
-		case 1:
-			// cancel
-			break;
-			
-		case 2:
-			// done
-			// TO-DO: render text into image
-//			NSString *textToRender = [alertView ]
-			
-			// TO-DO: send image to render
-			
-			
-		default:
-			break;
+	
+	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_CANCEL_BUTTON_TITLE]) {
+		switch (buttonIndex) {
+			case 1:
+				// "cancel"
+				break;
+				
+			case 2:
+				// "done"
+				// TO-DO: render text into image
+				
+				for (UIView *view in alertView.subviews) {
+					if ([view isKindOfClass:[UITextField class]]) {
+						UITextField *textField = (UITextField *)view;
+						NSString *stringToRender = textField.text;
+						
+						UIFont *font = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
+						CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
+						
+						UIGraphicsBeginImageContext(size);
+						
+						[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
+						
+						UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+						NSData *data = UIImagePNGRepresentation(image);
+					}
+				}
+				
+				// TO-DO: send image to render
+				
+				
+			default:
+				break;
+		}
 	}
 }
 
