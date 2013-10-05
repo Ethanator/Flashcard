@@ -58,10 +58,10 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
 		FCDeckCollectionViewCell *viewCell = (FCDeckCollectionViewCell *)cell;
-        
+        NSInteger deckIndex = indexPath.row;
         
 	}
 	
@@ -155,18 +155,20 @@
 	// fetch the decks, store them to array
 	
 	NSError * error;
-    if (!DEBUG) self.decks = [self.databaseContext executeFetchRequest:request error:&error];
-    else {
-			Deck *deck1 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
-																										inManagedObjectContext:self.databaseContext];
-			Deck *deck2 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
-																									inManagedObjectContext:self.databaseContext];
-			Deck *deck3 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
-																									inManagedObjectContext:self.databaseContext];
-        deck1.name = @"Ethan"; deck1.index = [NSNumber numberWithInt:0];
-        deck2.name = @"Sean"; deck2.index = [NSNumber numberWithInt:1];
-        deck3.name = @"Shuyang"; deck3.index = [NSNumber numberWithInt:2];
-        
+    if (!DEBUG) {
+        self.decks = [self.databaseContext executeFetchRequest:request error:&error];
+        // Sort the self.decks
+        NSSortDescriptor *sortByIndex = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByIndex];
+        NSArray *sortedArray = [self.decks sortedArrayUsingDescriptors:sortDescriptors];
+        self.decks = sortedArray;
+    } else {
+        Deck *deck1 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
+                                                    inManagedObjectContext:self.databaseContext];
+        Deck *deck2 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
+                                                    inManagedObjectContext:self.databaseContext];
+        Deck *deck3 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
+                        inManagedObjectContext:self.databaseContext];
         self.decks = @[deck1, deck2, deck3];
     }
 	[self.collectionView reloadData];
