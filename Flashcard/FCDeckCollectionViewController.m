@@ -236,6 +236,9 @@
                                               otherButtonTitles:ALERT_VIEW_OTHER_BUTTON];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView show];
+    /*
+        */
+
 }
 
 // Create a new deck based on the information passed by the alert view

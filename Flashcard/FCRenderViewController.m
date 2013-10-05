@@ -53,15 +53,14 @@
 	[super viewDidAppear:animated];
 	self.renderWebView.scrollView.maximumZoomScale = 4.0;
 	self.renderWebView.scrollView.minimumZoomScale = 0.00000001;
-	UIImageView* cropRectImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CROP_RECT_WIDTH, CROP_RECT_HEIGHT)];
-	cropRectImageView.center = self.view.center;
-	cropRectImageView.image = [UIImage imageNamed:RECT_IMAGE_NAME];
-	cropRectImageView.contentMode = UIViewContentModeScaleAspectFit;
+	self.cropRectImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RECT_IMAGE_NAME]];
+	self.cropRectImageView.center = self.view.center;
+	self.cropRectImageView.frame = CGRectMake(0, 0, self.cropRectImageView.image.size.width / 3, self.cropRectImageView.image.size.height / 3);
+	self.cropRectImageView.contentMode = UIViewContentModeScaleAspectFit;
 	UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-	[cropRectImageView addGestureRecognizer:pan];
-	[self.view addSubview:cropRectImageView];
-	cropRectImageView.userInteractionEnabled = YES;
-	self.cropRectImageView = cropRectImageView;
+	[self.cropRectImageView addGestureRecognizer:pan];
+	[self.view addSubview:self.cropRectImageView];
+	self.cropRectImageView.userInteractionEnabled = YES;
 	
 }
 
@@ -134,8 +133,12 @@ newY,
 }
 - (IBAction)backButtonTapped:(UIBarButtonItem *)sender
 {
+		
 	UIImage * screenImage = [self screenshot];
-	CGImageRef imageRef = CGImageCreateWithImageInRect([screenImage CGImage], self.cropRectImageView.frame);
+	CGImageRef imageRef = CGImageCreateWithImageInRect([screenImage CGImage], CGRectMake(self.cropRectImageView.frame.origin.x*2,
+																																											 self.cropRectImageView.frame.origin.y*2,
+																																											 self.cropRectImageView.frame.size.width*2,
+																																											 self.cropRectImageView.frame.size.height*2));
 	UIImage* croppedImage = [UIImage imageWithCGImage:imageRef];
 	CGImageRelease(imageRef);
 	
@@ -167,17 +170,22 @@ newY,
 	self.backImageView.image = self.backImage;
 	[self.view addSubview:self.backImageView];
 	
-	//animate that view to the top right
-	self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.backImageView.frame.size.width / 2, self.backImageView.frame.size.width / 2);
-	self.backImageView.frame = CGRectMake(self.backImageView.frame.origin.x,
-																	 self.backImageView.frame.origin.y,
-																	 self.backImageView.frame.size.width / 2,
-																	 self.backImageView.frame.size.height / 2);
+//	[UIView animateWithDuration:2.0 animations:^(void){
+//		//animate that view to the top right
+//		self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.backImageView.frame.size.width / 2, self.backImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
+//		self.backImageView.frame = CGRectMake(self.backImageView.frame.origin.x,
+//																					self.backImageView.frame.origin.y,
+//																					self.backImageView.frame.size.width / 2,
+//																					self.backImageView.frame.size.height / 2);
+//	}];
 }
 - (IBAction)frontButtonTapped:(UIBarButtonItem *)sender
 {
 	UIImage * screenImage = [self screenshot];
-	CGImageRef imageRef = CGImageCreateWithImageInRect([screenImage CGImage], self.cropRectImageView.frame);
+	CGImageRef imageRef = CGImageCreateWithImageInRect([screenImage CGImage], CGRectMake(self.cropRectImageView.frame.origin.x*2,
+																																											 self.cropRectImageView.frame.origin.y*2,
+																																											 self.cropRectImageView.frame.size.width*2,
+																																											 self.cropRectImageView.frame.size.height*2) );
 	UIImage* croppedImage = [UIImage imageWithCGImage:imageRef];
 	CGImageRelease(imageRef);
 	
@@ -208,18 +216,24 @@ newY,
 	self.frontImageView = [[UIImageView alloc] initWithFrame:self.cropRectImageView.frame];
 	self.frontImageView.image = self.frontImage;
 	[self.view addSubview:self.frontImageView];
+	
+	self.frontImageView.center = self.cropRectImageView.center;
 
-	self.frontImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.frontImageView.frame.size.width / 2, self.frontImageView.frame.size.width / 2);
-	self.frontImageView.frame = CGRectMake(self.frontImageView.frame.origin.x,
-																	 self.frontImageView.frame.origin.y,
-																	 self.frontImageView.frame.size.width / 2,
-																	 self.frontImageView.frame.size.height / 2);
+	[UIView animateWithDuration:2.0 animations:^(void){
+		self.frontImageView.center = CGPointMake(self.frontImageView.frame.size.width / 2, self.frontImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
+		self.frontImageView.frame = CGRectMake(self.frontImageView.frame.origin.x,
+																					 self.frontImageView.frame.origin.y,
+																					 self.frontImageView.frame.size.width / 2,
+																					 self.frontImageView.frame.size.height / 2);
+	}];
+	
 }
 
 //got this method from apple's website:
 //http://developer.apple.com/library/ios/#qa/qa1703/_index.html#//apple_ref/doc/uid/DTS40010193
 - (UIImage*)screenshot
 {
+	self.cropRectImageView.hidden = YES;
 	// Create a graphics context with the target size
 	// On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
 	// On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
@@ -264,6 +278,7 @@ newY,
 	//	NSLog(@"time stamp");
 	
 	UIGraphicsEndImageContext();
+	self.cropRectImageView.hidden = NO;
 		
 	return image;
 }
