@@ -44,6 +44,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+	return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+	return [self.decks count];
+}
+
+
 - (void)pullCoreData {
 	
 	//start the activity indicator
