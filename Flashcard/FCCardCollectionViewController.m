@@ -15,7 +15,7 @@
 #import "FCRenderViewController.h"
 #import "Constants.h"
 #import <CoreText/CoreText.h>
-
+#import <CoreData/CoreData.h>
 
 @interface FCCardCollectionViewController () <FCCaptureImageViewControllerDelegate,UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
@@ -34,10 +34,14 @@
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
-
 @end
 
 @implementation FCCardCollectionViewController
+
+- (NSManagedObjectContext *)managedObjectContext {
+	if (!_managedObjectContext) _managedObjectContext = self.deck.managedObjectContext;
+	return _managedObjectContext;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,6 +87,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.navigationItem.title = self.deck.name;
+	
 
 }
 
@@ -163,7 +168,13 @@
 		} else {
 			viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeDisplayed.backImagePath];
 		}
+		
 	}
+	
+	// appearance
+	CGColorRef border = CELL_BORDER_COLOR.CGColor;
+	cell.layer.borderColor = border;
+	cell.layer.borderWidth = CELL_BORDER_WIDTH;
 	
 	return cell;
 }
@@ -198,8 +209,11 @@
 					animations:^{
 						if ([cardToBeChanged.frontUp boolValue]) {
 							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+							NSLog(@"Front image path:%@", cardToBeChanged.frontImagePath);
 						} else {
 							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+							
+							NSLog(@"Back image path:%@", cardToBeChanged.backImagePath);
 						}
 					} completion:NULL];
 	
@@ -245,7 +259,7 @@
 		NSLog(@"the cachedImagedPath is %@",imagePath);
 	}
 	
-	self.resourceURL = [NSURL fileURLWithPath:imagePath];
+	self.resourceURL = [NSURL URLWithString:imagePath];
 
 	
 	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
@@ -422,15 +436,20 @@
 // required method from FCRenderViewControllerDelegate
 - (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
-	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.deck.managedObjectContext];
+	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
 	card.frontImagePath = front;
 	card.backImagePath = back;
 	card.frontUp = [NSNumber numberWithBool:FALSE];
 	card.deck = self.deck;
-	card.index = [NSNumber numberWithInt:[self.deck.cards count] + 1];
+	card.index = [NSNumber numberWithInt:[self.deck.cards count] - 1];
+	
+	NSLog(@"front: %@\n", card.frontImagePath);
+	NSLog(@"back: %@\n", card.backImagePath);
+	NSLog(@"deck: %@\n", card.deck.name);
+	NSLog(@"index: %@", card.index);
 	
 	NSError *error;
-	if (![self.deck.managedObjectContext save:&error]) {
+	if (![self.managedObjectContext save:&error]) {
 		NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
 	}
 	
@@ -438,5 +457,37 @@
 
 }
 
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
+}
+
+-(BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(cut:)) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(cut:))
+	{
+		int itemIndex = [indexPath indexAtPosition:1];
+        
+        Card *cardToBeDeleted = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
+            Card *cardInDeck = (Card *)obj;
+            BOOL r = ([cardInDeck.index integerValue] == itemIndex);
+            return r;
+        }] anyObject];
+
+        NSMutableSet *tmpSet = [self.deck.cards mutableCopy];
+        [tmpSet removeObject:cardToBeDeleted];
+        self.deck.cards = tmpSet;
+		//[self.deck.cards.databaseContext deleteObject:cardToBeDeleted];
+		[self.collectionView reloadData];
+	}
+}
 
 @end

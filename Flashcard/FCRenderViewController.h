@@ -20,4 +20,7 @@
 @interface FCRenderViewController : UIViewController
 @property (nonatomic, strong) NSURL * resourceURL;
 @property (nonatomic, weak) id<FCRenderViewControllerDelegate> delegate;
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 @end

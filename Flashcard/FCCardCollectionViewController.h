@@ -13,4 +13,6 @@
 
 @property (strong, nonatomic) Deck *deck;
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @end

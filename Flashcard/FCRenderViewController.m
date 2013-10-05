@@ -44,7 +44,7 @@
     [super viewDidLoad];
     
     self.renderWebView.delegate = self;
-	NSString *testString = @"http://www.google.com";
+	//NSString *testString = @"http://www.google.com";
 //    self.resourceURL = [NSURL URLWithString:[testString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [self loadURLToWebView];
 	// Do any additional setup after loading the view.
@@ -54,6 +54,10 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:(self.uniqueIdentifierForInstance + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 	
 	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	if (DEBUG) {
+		NSLog(@"Unique id number:%d", self.uniqueIdentifierForInstance);
+	}
 	
 }
 
@@ -187,6 +191,10 @@ newY,
 																					self.backImageView.frame.size.width / 2,
 																					self.backImageView.frame.size.height / 2);
 	}];
+	
+	if (DEBUG) {
+		NSLog(imagePath);
+	}
 }
 - (IBAction)frontButtonTapped:(UIBarButtonItem *)sender
 {
@@ -236,6 +244,9 @@ newY,
 																					 self.frontImageView.frame.size.height / 2);
 	}];
 	
+	if (DEBUG) {
+		NSLog(imagePath);
+	}
 }
 
 //got this method from apple's website:

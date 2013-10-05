@@ -57,6 +57,10 @@
 // below are for custom UIImageView
 #define CARD_IMAGE_CORNER_RADIUS 8.0
 
+// below are for runtime attributes on ui objects
+#define CELL_BORDER_COLOR [UIColor blueColor]
+#define CELL_BORDER_WIDTH 0.5
+
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
 #define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
