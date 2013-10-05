@@ -10,5 +10,10 @@
 
 @interface FCCardCollectionViewController : UICollectionViewController
 
+@property (strong, nonatomic) NSMutableArray *cardsInDeck;
+
+- (void)pullCoreData;
+
+
 
 @end
