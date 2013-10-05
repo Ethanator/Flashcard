@@ -58,6 +58,9 @@
 	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DECK_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	if ([cell isKindOfClass:[FCDeckCollectionViewCell class]]) {
 		FCDeckCollectionViewCell *viewCell = (FCDeckCollectionViewCell *)cell;
+        
+        
+        
 	}
 	
 	return cell;
