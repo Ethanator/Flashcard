@@ -140,11 +140,22 @@
 	// update the view
 	FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
 	
-	if ([cardToBeChanged.frontUp boolValue]) {
-		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
-	} else {
-		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
-	}
+//	if ([cardToBeChanged.frontUp boolValue]) {
+//		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+//	} else {
+//		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+//	}
+	
+	[UIView transitionWithView:viewCell.cardView
+					  duration:FLIPPING_ANIMATION_DURATION
+					   options:UIViewAnimationTransitionFlipFromLeft
+					animations:^{
+						if ([cardToBeChanged.frontUp boolValue]) {
+							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+						} else {
+							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+						}
+					} completion:NULL];
 	
 }
 
@@ -275,22 +286,8 @@
 		} else if (buttonIndex == 1) {
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
-			
-			
-			// deprecated UIKit drawing, very highly pixelated
-			 
-//			UIFont *oldFont = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
-//			CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
-//
-//			UIGraphicsBeginImageContext(size);
-//			UIGraphicsBeginImageContextWithOptions(size,NO,0.0);
-//			
-//			[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
-//
-//			UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//			UIGraphicsEndImageContext();
-			
-			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 2em; font-family: sans-serif; }</style></head> <body>%@</body></html>", stringToRender];
+						
+			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body>%@</body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
@@ -326,7 +323,7 @@
 	}
 }
 
-// method from FCRenderViewControllerDelegate
+// required method from FCRenderViewControllerDelegate
 - (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
 	// Model
@@ -337,7 +334,8 @@
 	
 	
 	// View
-	
+	[self.deck addCardsObject:card];
+	[self.collectionView reloadData];
 	
 
 }

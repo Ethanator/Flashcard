@@ -50,6 +50,9 @@
 // below are for text rendering
 #define RENDERED_TEXT_SIZE 26.0f
 
+// below is for animated flipping
+#define FLIPPING_ANIMATION_DURATION 0.5
+
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
 #define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
