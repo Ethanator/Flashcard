@@ -51,8 +51,6 @@
 	 
 																							 name:UIApplicationDidBecomeActiveNotification object:nil];
 	
-	// NEED TO SET THE TITLE OF THE NAVIGATION BAR TO SELF.DECK.NAME
-	
 	    [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -70,7 +68,15 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+	
+	
 	[self appIntoForeground];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationItem.title = self.deck.name;
+
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -312,7 +318,7 @@
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
 						
-			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 200px; height: 150px; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
+			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { text-align: center; display: table-cell; width: 500px; height: 500px; text-align: center; vertical-align: middle; } p { text-align: center; font-size: 4em; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
