@@ -52,7 +52,7 @@
 	UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CARD_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
 		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
-		Card *cardToBeDisplayed = [self.deck.cards ]
+//		Card *cardToBeDisplayed = [self.deck.cards ]
 	}
 	
 	return cell;
