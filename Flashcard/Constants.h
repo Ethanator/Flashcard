@@ -25,10 +25,10 @@
 #define ACTION_SHEET_TITLE @"Add Card"
 #define CANCEL_BUTTON_TITLE @"Cancel"
 #define DESTRUCTIVE_BUTTON_TITLE nil
+#define OTHER_BUTTON_TITLES @"Text", @"Web", @"Camera", nil
 
 /* ETHANS CONSTANTS */
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
 #define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
-#define OTHER_BUTTON_TITLES @"Text", @"Web", @"Camera", nil
 
 #endif
