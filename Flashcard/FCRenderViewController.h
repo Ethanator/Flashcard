@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FCCardCollectionViewCell.h"
+
+
+@protocol FCRenderViewControllerDelegate
+-(void) didCollectFront:(NSString *)front andDidCollectBack:(NSString *)back;
+@end
+
 
 @interface FCRenderViewController : UIViewController
-
+@property (nonatomic, strong) NSURL * resourceURL;
+@property (nonatomic, weak) id<FCRenderViewControllerDelegate> delegate;
 @end
