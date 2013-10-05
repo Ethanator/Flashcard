@@ -7,8 +7,11 @@
 //
 
 #import "FCDeckCollectionViewController.h"
+#import "Deck.h"
 
 @interface FCDeckCollectionViewController ()
+
+@property (strong, nonatomic) NSArray *decks;
 
 @end
 
@@ -34,5 +37,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)pullCoreData {
+	
+}
+
 
 @end

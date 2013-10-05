@@ -7,8 +7,11 @@
 //
 
 #import "FCCardCollectionViewController.h"
+#import "Deck.h"
+#import "Card.h"
 
 @interface FCCardCollectionViewController ()
+
 
 @end
 

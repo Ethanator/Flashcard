@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deck.h"
 
 @interface FCCardCollectionViewController : UICollectionViewController
 
-@property (strong, nonatomic) NSMutableArray *cardsInDeck;
-
-- (void)pullCoreData;
-
+@property (strong, nonatomic) Deck *deck;
 
 
 @end
