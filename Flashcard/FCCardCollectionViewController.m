@@ -107,7 +107,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CARD_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	
-	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
+	if ([FCCardCollectionViewCell isKindOfClass:[FCCardCollectionViewCell class]]) {
 		
 		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
 		

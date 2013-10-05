@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class FCDeckCollectionViewCell; // Forward declare Custom Cell for the property
+
+@protocol MyMenuDelegate <NSObject>
+@optional
+- (void)customAction:(id)sender forCell:(FCDeckCollectionViewCell *)cell;
+@end
+
 @interface FCDeckCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *deckName;
 @property (weak, nonatomic) IBOutlet UIImageView *deckImageView;
-
-
+@property (weak, nonatomic) id<MyMenuDelegate> delegate;
+@property int index;
 
 @end

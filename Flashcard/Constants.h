@@ -60,6 +60,7 @@
 #define DECK_COLLECTION_VIEW_CELL_IDENTIFIER @"Deck"
 #define DECK_TO_CARD_SEGUE_IDENTIFIER @"DeckToCard"
 #define ALERT_VIEW_TITLE @"New Deck"
+#define ALERT_VIEW_RENAME_FILE @"Rename Deck"
 #define ALERT_VIEW_MESSAGE @"Please enter the name of the deck."
 #define ALERT_VIEW_CANCEL_BUTTON @"Cancel"
 #define ALERT_VIEW_OTHER_BUTTON @"OK",nil

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Constants.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
+#import "FCDeckCollectionViewCell.h"
 
 @interface FCDeckCollectionViewController : UICollectionViewController <LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout>
 
+-(void)changeNameOfCell:(FCDeckCollectionViewCell*) cell name:(NSString *)name;
 
 @end
