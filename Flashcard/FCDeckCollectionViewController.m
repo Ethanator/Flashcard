@@ -218,13 +218,30 @@
 }
 
 - (IBAction)addNewDeck:(id)sender {
-    Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
-                                                  inManagedObjectContext:self.databaseContext];
-	newDeck.name = @"Stupid Ethan";
-	
-    [self.decks addObject:newDeck];
-	[self.collectionView reloadData];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Deck"
+                                                        message:@"Please enter the name of the deck."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"OK",nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+    /*
+        */
+
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        Deck *newDeck = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
+                                                      inManagedObjectContext:self.databaseContext];
+        newDeck.name = name;
+        [self.decks addObject:newDeck];
+        [self.collectionView reloadData];
+        // name contains the entered value
+    }
+}
 
 @end
