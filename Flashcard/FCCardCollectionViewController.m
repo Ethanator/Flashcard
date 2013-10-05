@@ -17,6 +17,7 @@
 #import <CoreText/CoreText.h>
 #import <CoreData/CoreData.h>
 
+
 @interface FCCardCollectionViewController () <FCCaptureImageViewControllerDelegate,UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
 @property (nonatomic, strong) NSURL *resourceURL;
@@ -148,7 +149,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CARD_COLLECTION_VIEW_CELL_IDENTIFIER forIndexPath:indexPath];
 	
-	if ([FCCardCollectionViewCell isKindOfClass:[FCCardCollectionViewCell class]]) {
+	if ([cell isKindOfClass:[FCCardCollectionViewCell class]]) {
 		
 		FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)cell;
 		
@@ -183,6 +184,9 @@
 	
 	NSInteger cardIndex = indexPath.row;
 	
+	NSSet* cards = self.deck.cards;
+	int index = [[(Card *)[cards anyObject] index] intValue];
+	index++;
 	// find the card in deck
 	Card *cardToBeChanged = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
 		Card *cardInDeck = (Card *)obj;
@@ -485,9 +489,25 @@
         NSMutableSet *tmpSet = [self.deck.cards mutableCopy];
         [tmpSet removeObject:cardToBeDeleted];
         self.deck.cards = tmpSet;
+		
+		for (Card* card in self.deck.cards)
+		{
+			if ([card.index intValue] > itemIndex)
+			{
+				card.index = [NSNumber numberWithInt:([card.index intValue] - 1)];
+			}
+		}
+		
 		//[self.deck.cards.databaseContext deleteObject:cardToBeDeleted];
 		[self.collectionView reloadData];
 	}
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+												layout:(UICollectionViewLayout*)collectionViewLayout
+				insetForSectionAtIndex:(NSInteger)section
+{
+	return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 @end
