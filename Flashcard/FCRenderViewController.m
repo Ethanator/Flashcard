@@ -8,9 +8,10 @@
 
 #import "FCRenderViewController.h"
 
-@interface FCRenderViewController ()
-@property (strong, nonatomic) NSString *resourceURL;
+@interface FCRenderViewController () <UIWebViewDelegate>
+@property (strong, nonatomic) NSURL *resourceURL;
 @property (weak, nonatomic) IBOutlet UIWebView *renderWebView;
+@property (strong, nonatomic) NSManagedObjectContext *databaseContext;
 @end
 
 @implementation FCRenderViewController
@@ -27,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.renderWebView.delegate = self;
 	// Do any additional setup after loading the view.
 }
 
@@ -35,5 +38,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void) loadURLToWebView {
+    [self.renderWebView loadRequest:[NSURLRequest requestWithURL:self.resourceURL]];
+}
+    
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    NSLog(@"Error for WEBVIEW: %@", [error description]);
+}
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"Finished");
+}
+
 
 @end
