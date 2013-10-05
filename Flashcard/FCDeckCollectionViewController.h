@@ -1,5 +1,5 @@
 //
-//  FCViewController.h
+//  FCDeckCollectionViewController.h
 //  Flashcard
 //
 //  Created by Sean Fitzgerald on 10/4/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FCViewController : UIViewController
+@interface FCDeckCollectionViewController : UICollectionViewController
 
 @end

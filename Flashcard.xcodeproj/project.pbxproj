@@ -14,13 +14,13 @@
 		2C54846517FFA0BE00F13C12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54846417FFA0BE00F13C12 /* main.m */; };
 		2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54846817FFA0BE00F13C12 /* FCAppDelegate.m */; };
 		2C54846C17FFA0BE00F13C12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C54846A17FFA0BE00F13C12 /* Main.storyboard */; };
-		2C54846F17FFA0BE00F13C12 /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54846E17FFA0BE00F13C12 /* FCViewController.m */; };
 		2C54847117FFA0BE00F13C12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C54847017FFA0BE00F13C12 /* Images.xcassets */; };
 		2C54847817FFA0BE00F13C12 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C54847717FFA0BE00F13C12 /* XCTest.framework */; };
 		2C54847917FFA0BE00F13C12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C54845817FFA0BE00F13C12 /* Foundation.framework */; };
 		2C54847A17FFA0BE00F13C12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C54845C17FFA0BE00F13C12 /* UIKit.framework */; };
 		2C54848217FFA0BE00F13C12 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C54848017FFA0BE00F13C12 /* InfoPlist.strings */; };
 		2C54848417FFA0BE00F13C12 /* FlashcardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54848317FFA0BE00F13C12 /* FlashcardTests.m */; };
+		2C54848F17FFA77900F13C12 /* FCDeckCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +45,14 @@
 		2C54846717FFA0BE00F13C12 /* FCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCAppDelegate.h; sourceTree = "<group>"; };
 		2C54846817FFA0BE00F13C12 /* FCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCAppDelegate.m; sourceTree = "<group>"; };
 		2C54846B17FFA0BE00F13C12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2C54846D17FFA0BE00F13C12 /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
-		2C54846E17FFA0BE00F13C12 /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
 		2C54847017FFA0BE00F13C12 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C54847617FFA0BE00F13C12 /* FlashcardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashcardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C54847717FFA0BE00F13C12 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2C54847F17FFA0BE00F13C12 /* FlashcardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlashcardTests-Info.plist"; sourceTree = "<group>"; };
 		2C54848117FFA0BE00F13C12 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C54848317FFA0BE00F13C12 /* FlashcardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlashcardTests.m; sourceTree = "<group>"; };
+		2C54848D17FFA77900F13C12 /* FCDeckCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCDeckCollectionViewController.h; sourceTree = "<group>"; };
+		2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +115,8 @@
 				2C54846717FFA0BE00F13C12 /* FCAppDelegate.h */,
 				2C54846817FFA0BE00F13C12 /* FCAppDelegate.m */,
 				2C54846A17FFA0BE00F13C12 /* Main.storyboard */,
-				2C54846D17FFA0BE00F13C12 /* FCViewController.h */,
-				2C54846E17FFA0BE00F13C12 /* FCViewController.m */,
+				2C54848D17FFA77900F13C12 /* FCDeckCollectionViewController.h */,
+				2C54848E17FFA77900F13C12 /* FCDeckCollectionViewController.m */,
 				2C54847017FFA0BE00F13C12 /* Images.xcassets */,
 				2C54845F17FFA0BE00F13C12 /* Supporting Files */,
 			);
@@ -252,7 +252,7 @@
 			files = (
 				2C54846517FFA0BE00F13C12 /* main.m in Sources */,
 				2C54846917FFA0BE00F13C12 /* FCAppDelegate.m in Sources */,
-				2C54846F17FFA0BE00F13C12 /* FCViewController.m in Sources */,
+				2C54848F17FFA77900F13C12 /* FCDeckCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
