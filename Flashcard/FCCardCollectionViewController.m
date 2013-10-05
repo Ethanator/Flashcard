@@ -26,6 +26,7 @@
 - (void)renderText;
 - (void)promptURL;
 - (void)cameraButtonTapped:(id)sender;
+- (void)getImageFromPhotos;
 
 // methods to handle UIAlertView actions, coming from UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
@@ -227,8 +228,13 @@
 			break;
 			
 		case 2:
-			// image case
+			// camera case
 			[self cameraButtonTapped:self];
+			break;
+			
+		case 3:
+			// photos case
+			[self getImageFromPhotos];
 			break;
 			
 		default:
@@ -253,6 +259,23 @@
 	}
 	picker.delegate = self;
 	[self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)getImageFromPhotos {
+	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	} else {
+		[[[UIAlertView alloc] initWithTitle:@"Photo Library Not Available"
+									message:nil
+								   delegate:self
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+		return;
+	}
+	picker.delegate = self;
+	[self presentViewController:picker animated:YES completion:nil];
+
 }
 
 // method to handle text case
