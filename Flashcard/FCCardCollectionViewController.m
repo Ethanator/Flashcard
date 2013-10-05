@@ -13,6 +13,8 @@
 #import "UIImage+cameraOrientationFix.h"
 #import "FCRenderViewController.h"
 #import "Constants.h"
+#import <CoreText/CoreText.h>
+
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
@@ -157,8 +159,7 @@
 }
 
 
-// code below from UIImagePickerControllerDelegate
-
+// from UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -196,7 +197,7 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-// code above from UIImagePickerControllerDelegate
+// code from UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// as in <UIActionSheetDelegate>
 	// push only for url
@@ -244,6 +245,7 @@
 }
 
 // method to handle text case
+// might want to change the size of the image since it's way too big
 - (void)renderText {
 	UIAlertView *promptForTextView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_TEXT_TITLE
 																message:PROMPT_FOR_TEXT_MESSAGE
@@ -254,30 +256,34 @@
 	[promptForTextView show];
 }
 
-
-// method to handle UIAlertView action
--(void)alertView:(UIAlertView *)alertView
-clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+// method to handle UIAlertView action, from UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	
 	if ([alertView.title isEqualToString:PROMPT_FOR_TEXT_TITLE]) {
 		
-		if (buttonIndex == 0)
-		{
+		if (buttonIndex == 0) {
 			NSLog(@"User Canceled with the cancel button.");
 			return;
-		} else if (buttonIndex == 1)
-		{
+		} else if (buttonIndex == 1) {
+			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
-			UIFont *font = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
-			CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
 			
-			UIGraphicsBeginImageContext(size);
 			
-			[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
+			// deprecated UIKit drawing, very highly pixelated
+			 
+//			UIFont *oldFont = [UIFont systemFontOfSize:RENDERED_TEXT_SIZE];
+//			CGSize size = [stringToRender sizeWithAttributes:@{NSFontAttributeName : font}];
+//
+//			UIGraphicsBeginImageContext(size);
+//			UIGraphicsBeginImageContextWithOptions(size,NO,0.0);
+//			
+//			[stringToRender drawAtPoint:CGPointMake(0.0, 0.0) withAttributes:@{NSFontAttributeName : font}];
+//
+//			UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//			UIGraphicsEndImageContext();
 			
-			UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-			NSData *imageData = UIImagePNGRepresentation(image);
-			
+			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 2em; }</style></head> <body>%@</body></html>", stringToRender];
+						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
 			[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
@@ -286,16 +292,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 			
 			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 			NSString *documentsDirectory = [paths objectAtIndex:0];
+			NSString *filePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.html",cardUniqueIDCounter]];
+			NSError *error;
 			
-			NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"image%d.png",cardUniqueIDCounter]];
-			
-			if (![imageData writeToFile:imagePath atomically:NO]) {
+			if (![html writeToFile:filePath atomically:NO encoding:NSUTF8StringEncoding error:&error]) {
 				NSLog((@"Failed to cache image data to disk"));
 			} else {
-				NSLog(@"the cachedImagedPath is %@",imagePath);
+				NSLog(@"the cachedImagedPath is %@",filePath);
 			}
 			
-			self.resourceURL = [NSURL fileURLWithPath:imagePath];
+			self.resourceURL = [NSURL fileURLWithPath:filePath];
 			
 			[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 		}
@@ -303,6 +309,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	}
 }
 
+
+// method from FCRenderViewControllerDelegate
+- (void) didCollectFront:(NSString *)front andDidCollectBack:(NSString *)back {
+	
+}
 
 
 @end

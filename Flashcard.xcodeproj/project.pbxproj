@@ -31,6 +31,7 @@
 		3F7AEFB717FFD2F9002D6D9A /* FCDeckCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */; };
 		8899CE7117FFB4550034D788 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8899CE7417FFB8610034D788 /* FCCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */; };
+		8899CE8218002D080034D788 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8899CE8118002D080034D788 /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		3F7AEFB617FFD2F9002D6D9A /* FCDeckCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCDeckCollectionViewCell.m; sourceTree = "<group>"; };
 		8899CE7217FFB8610034D788 /* FCCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCCardCollectionViewCell.h; sourceTree = "<group>"; };
 		8899CE7317FFB8610034D788 /* FCCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCCardCollectionViewCell.m; sourceTree = "<group>"; };
+		8899CE8118002D080034D788 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8899CE8218002D080034D788 /* CoreText.framework in Frameworks */,
 				2C5484AA17FFCBFB00F13C12 /* CoreData.framework in Frameworks */,
 				2C54845B17FFA0BE00F13C12 /* CoreGraphics.framework in Frameworks */,
 				2C54845D17FFA0BE00F13C12 /* UIKit.framework in Frameworks */,
@@ -129,6 +132,7 @@
 		2C54845717FFA0BE00F13C12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8899CE8118002D080034D788 /* CoreText.framework */,
 				2C5484A917FFCBFB00F13C12 /* CoreData.framework */,
 				2C54845817FFA0BE00F13C12 /* Foundation.framework */,
 				2C54845A17FFA0BE00F13C12 /* CoreGraphics.framework */,
