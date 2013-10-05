@@ -12,10 +12,15 @@
 #import "Card.h"
 #import "Constants.h"
 
-@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate>
+@interface FCCardCollectionViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+
+// methods to handle different types of inputs
 - (void)renderText;
+- (void)cameraButtonTapped:(id)sender;
+
+
 
 @end
 
@@ -147,6 +152,7 @@
 			
 		case 2:
 			// image case
+			[self cameraButtonTapped:self];
 			break;
 			
 		default:
