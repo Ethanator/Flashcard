@@ -40,7 +40,6 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <outlet property="deckImage" destination="dBU-kW-vJI" id="nRe-a5-cC8"/>
                                     <outlet property="deckName" destination="RnJ-EW-DCO" id="ob3-Ld-xGQ"/>
                                 </connections>
                             </collectionViewCell>

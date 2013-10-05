@@ -18,7 +18,7 @@
 #define DECK_ENTITY_NAME @"Deck"
 #define CARD_ENTITY_NAME @"Card"
 #define EXTERNALLY_OPENED_URL_DEFAULTS @"externallyOpenedURL"
-#define OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE @"Please choose a flashcard deck for your card:"
+#define OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE @"Please choose a flashcard deck for your card."
 #define OK_BUTTON_TITLE @"OK"
 #define CARD_TO_RENDER_SEGUE_IDENTIFIER @"ShowRenderViewController"
 

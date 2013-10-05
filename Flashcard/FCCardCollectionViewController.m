@@ -43,19 +43,26 @@
 
 - (void)viewDidLoad
 {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
+	 
+																							 name:UIApplicationDidBecomeActiveNotification object:nil];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
-
--(void)viewDidAppear:(BOOL)animated
+-(void)appIntoForeground
 {
-	[super viewDidAppear:animated];
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
 	{
 		self.resourceURL = [[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
 		[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 	}
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[self appIntoForeground];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
