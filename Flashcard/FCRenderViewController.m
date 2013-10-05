@@ -51,8 +51,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	self.renderWebView.scrollView.maximumZoomScale = 4.0;
-	self.renderWebView.scrollView.minimumZoomScale = 0.00000001;
+//	self.renderWebView.scrollView.maximumZoomScale = 4.0;
+//	self.renderWebView.scrollView.minimumZoomScale = 0.00000001;
 	self.cropRectImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:RECT_IMAGE_NAME]];
 	self.cropRectImageView.center = self.view.center;
 	self.cropRectImageView.frame = CGRectMake(0, 0, self.cropRectImageView.image.size.width / 3, self.cropRectImageView.image.size.height / 3);
@@ -170,14 +170,14 @@ newY,
 	self.backImageView.image = self.backImage;
 	[self.view addSubview:self.backImageView];
 	
-//	[UIView animateWithDuration:2.0 animations:^(void){
-//		//animate that view to the top right
-//		self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.backImageView.frame.size.width / 2, self.backImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
-//		self.backImageView.frame = CGRectMake(self.backImageView.frame.origin.x,
-//																					self.backImageView.frame.origin.y,
-//																					self.backImageView.frame.size.width / 2,
-//																					self.backImageView.frame.size.height / 2);
-//	}];
+	[UIView animateWithDuration:2.0 animations:^(void){
+		//animate that view to the top right
+		self.backImageView.center = CGPointMake(self.renderWebView.bounds.size.width - self.backImageView.frame.size.width / 2, self.backImageView.frame.size.width / 2 + [[self.navigationController navigationBar] frame].size.height);
+		self.backImageView.frame = CGRectMake(self.backImageView.frame.origin.x,
+																					self.backImageView.frame.origin.y,
+																					self.backImageView.frame.size.width / 2,
+																					self.backImageView.frame.size.height / 2);
+	}];
 }
 - (IBAction)frontButtonTapped:(UIBarButtonItem *)sender
 {

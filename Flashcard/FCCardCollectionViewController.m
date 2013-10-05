@@ -184,7 +184,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
-//	capturedimage = [capturedimage fixOrientation];
+	capturedimage = [capturedimage fixOrientation];
 		
 //	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 //	
@@ -199,7 +199,7 @@
 	
 	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"tempImage.png"]];
 
-	//	NSLog((@"pre writing to file"));
+		NSLog((@"pre writing to file"));
 	if (![imageData writeToFile:imagePath atomically:NO])
 	{
 		NSLog((@"Failed to cache image data to disk"));
@@ -252,37 +252,49 @@
 // method to handle image case
 - (void)cameraButtonTapped:(id)sender
 {
-	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
-									message:nil
-								   delegate:self
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil] show];
-		return;
-	}
-	picker.delegate = self;
-	[self presentViewController:picker animated:YES completion:nil];
+	
+	[self startCameraControllerFromViewController:self
+																	usingDelegate:self];
+	
+//	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+//	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//	} else {
+//		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
+//									message:nil
+//								   delegate:self
+//						  cancelButtonTitle:@"OK"
+//						  otherButtonTitles:nil] show];
+//		return;
+//	}
+//	picker.delegate = self;
+//	[self presentViewController:picker animated:YES completion:nil];
 }
 
-- (void)getImageFromPhotos {
-	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	} else {
-		[[[UIAlertView alloc] initWithTitle:@"Photo Library Not Available"
-									message:nil
-								   delegate:self
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil] show];
-		return;
-	}
-	picker.delegate = self;
-	[self presentViewController:picker animated:YES completion:nil];
-
+- (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
+																	 usingDelegate: (id <UIImagePickerControllerDelegate,
+																									 UINavigationControllerDelegate>) delegate {
+	
+	if (([UIImagePickerController isSourceTypeAvailable:
+				UIImagePickerControllerSourceTypeCamera] == NO)
+			|| (delegate == nil)
+			|| (controller == nil))
+		return NO;
+	
+	
+	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+	cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+		
+	// Hides the controls for moving & scaling pictures, or for
+	// trimming movies. To instead show the controls, use YES.
+	cameraUI.allowsEditing = NO;
+	
+	cameraUI.delegate = delegate;
+	
+	[controller presentViewController:cameraUI animated:YES completion:nil];
+	return YES;
 }
+
 
 // method to handle text case
 - (void)renderText {
@@ -304,6 +316,20 @@
 													  otherButtonTitles:PROMPT_FOR_URL_OTHER_BUTTON_TITLES];
 	promptForURLView.alertViewStyle = UIAlertViewStylePlainTextInput;
 	[promptForURLView show];
+}
+
+-(void) getImageFromPhotos
+{
+	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+	cameraUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+	
+	// Hides the controls for moving & scaling pictures, or for
+	// trimming movies. To instead show the controls, use YES.
+	cameraUI.allowsEditing = NO;
+	
+	cameraUI.delegate = self;
+	
+	[self presentViewController:cameraUI animated:YES completion:nil];
 }
 
 // method to handle UIAlertView action, from UIAlertViewDelegate
