@@ -53,7 +53,7 @@
 	//get the bundle documents URL
 	NSURL * documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 	
-	//create a managed document from the douments URl and the appended "FlashcardDataModel"
+	//create a managed document from the douments URl and the appended the model's name
 	UIManagedDocument * databaseDocument = [[UIManagedDocument alloc] initWithFileURL:[documentsURL URLByAppendingPathComponent:FLASHCARD_DATA_MODEL_NAME]];
 	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[documentsURL path]])

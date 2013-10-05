@@ -9,6 +9,10 @@
 #ifndef Flashcard_Constants_h
 #define Flashcard_Constants_h
 
+// USE THIS AS NEEDED - comment below what it does in case somebody else is using it
+#define DEBUG NO
+
+
 /* SEANS CONSTANTS */
 #define FLASHCARD_DATA_MODEL_NAME @"FlashcardDataModel"
 
