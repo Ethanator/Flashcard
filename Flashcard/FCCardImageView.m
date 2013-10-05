@@ -7,6 +7,7 @@
 //
 
 #import "FCCardImageView.h"
+#import "Constants.h"
 
 @implementation FCCardImageView
 
@@ -19,13 +20,18 @@
     return self;
 }
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+	
+	UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:CARD_IMAGE_CORNER_RADIUS];
+	
+	[path addClip];
+	
 }
-*/
+
 
 @end
