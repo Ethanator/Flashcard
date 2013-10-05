@@ -14,7 +14,7 @@
 #import "FCRenderViewController.h"
 #import "Constants.h"
 #import <CoreText/CoreText.h>
-
+#import <CoreData/CoreData.h>
 
 @interface FCCardCollectionViewController () <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FCRenderViewControllerDelegate>
 
@@ -399,5 +399,37 @@
 
 }
 
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
+}
+
+-(BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(cut:)) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(cut:))
+	{
+		int itemIndex = [indexPath indexAtPosition:1];
+        
+        Card *cardToBeDeleted = [[self.deck.cards objectsPassingTest:^(id obj,BOOL *stop){
+            Card *cardInDeck = (Card *)obj;
+            BOOL r = ([cardInDeck.index integerValue] == itemIndex);
+            return r;
+        }] anyObject];
+
+        NSMutableSet *tmpSet = [self.deck.cards mutableCopy];
+        [tmpSet removeObject:cardToBeDeleted];
+        self.deck.cards = tmpSet;
+		//[self.deck.cards.databaseContext deleteObject:cardToBeDeleted];
+		[self.collectionView reloadData];
+	}
+}
 
 @end

@@ -3,7 +3,7 @@
 //  Flashcard
 //
 //  Created by Sean Fitzgerald on 10/4/13.
-//  Copyright (c) 2013 Sean T Fitzgerald. All rights reserved.
+//  Copyright (c) 2013 Sean T Fitzgerald, Ethan Y Chen. All rights reserved.
 //
 
 #import "FCDeckCollectionViewController.h"
@@ -126,8 +126,7 @@
     [super prepareForSegue:segue sender:sender];
 }
 
-#pragma mark -
-#pragma mark Core Data Methods
+#pragma mark - Core Data Methods
 
 - (void)pullCoreData {
 	
@@ -154,11 +153,11 @@
 				[self documentIsReady:databaseDocument];
 			}
 			else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
-																			 message:nil
-																			delegate:self
-														 cancelButtonTitle:nil
-														 otherButtonTitles: nil] show];
-		}];
+                                             message:nil
+                                            delegate:self
+                                   cancelButtonTitle:nil
+                                   otherButtonTitles: nil] show];
+		    }];
 	}
 	else
 	{
@@ -169,20 +168,20 @@
 										 //turn off the activity indicator
 #warning activity indicator
 
-										 if (success)
-										 {
-											 //pull the data from the document
-											 [self documentIsReady:databaseDocument];
+         if (success)
+         {
+             //pull the data from the document
+             [self documentIsReady:databaseDocument];
 
-											 //Put in a filler Deck because this is the first time the user has opened the app
-											 [self firstTimeDeckInsert];
-										 }
-										 else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
-																											message:nil
-																										 delegate:self
-																						cancelButtonTitle:nil
-																						otherButtonTitles: nil] show];
-									 }];
+             //Put in a filler Deck because this is the first time the user has opened the app
+             [self firstTimeDeckInsert];
+         }
+         else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
+                                          message:nil
+                                         delegate:self
+                                cancelButtonTitle:nil
+                                otherButtonTitles: nil] show];
+         }];
 	}
 
 	
@@ -272,12 +271,6 @@
     return NO;
 }
 
-#pragma mark - Custom Action(s)
-- (void)customAction:(id)sender {
-    NSLog(@"RR");
-}
-
-
 -(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(cut:))
@@ -294,43 +287,8 @@
     return YES;
 }
 
-#pragma mark - LXReorderableCollectionViewDataSource methods
-
-- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
-    Deck *currDeck = [self.decks objectAtIndex:fromIndexPath.item];
-    
-    [self.decks removeObjectAtIndex:fromIndexPath.item];
-    [self.decks insertObject:currDeck atIndex:toIndexPath.item];
+#pragma mark - Custom Action(s)
+- (void)customAction:(id)sender {
 }
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
-#if LX_LIMITED_MOVEMENT == 1
-#else
-    return YES;
-#endif
-}
-
-#pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"will begin drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"did begin drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"will end drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"did end drag");
-}
-
 
 @end
