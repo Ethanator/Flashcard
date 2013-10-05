@@ -10,6 +10,7 @@
 #import "FCDeckCollectionViewCell.h"
 #import "FCCardCollectionViewController.h"
 #import "Deck.h"
+#import <CoreData/CoreData.h>
 
 @interface FCDeckCollectionViewController ()
 
@@ -153,14 +154,14 @@
 	NSError * error;
     if (!DEBUG) self.decks = [databaseContext executeFetchRequest:request error:&error];
     else {
-        Deck *deck1 = [[Deck alloc] init];
+        /*Deck *deck1 = [NSEntityDescription ];
         Deck *deck2 = [[Deck alloc] init];
         Deck *deck3 = [[Deck alloc] init];
         deck1.name = @"Ethan"; deck1.index = [NSNumber numberWithInt:0];
         deck2.name = @"Sean"; deck2.index = [NSNumber numberWithInt:1];
         deck3.name = @"Shuyang"; deck3.index = [NSNumber numberWithInt:2];
         
-        self.decks = @[deck1, deck2, deck3];
+        self.decks = @[deck1, deck2, deck3];*/
     }
 	[self.collectionView reloadData];}
 
