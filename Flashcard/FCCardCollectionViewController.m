@@ -282,7 +282,7 @@
 //			UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 //			UIGraphicsEndImageContext();
 			
-			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 2em; }</style></head> <body>%@</body></html>", stringToRender];
+			NSString *html = [NSString stringWithFormat:@"<html><head><style>body { text-align: center; font-size: 2em; font-family: sans-serif; }</style></head> <body>%@</body></html>", stringToRender];
 						
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
@@ -309,10 +309,21 @@
 	}
 }
 
-
 // method from FCRenderViewControllerDelegate
-- (void) didCollectFront:(NSString *)front andDidCollectBack:(NSString *)back {
+- (void)didCollectFrontPath:(NSString *)front andBackPath:(NSString *)back {
 	
+	// Model
+	Card *card = [NSEntityDescription insertNewObjectForEntityForName:CARD_ENTITY_NAME inManagedObjectContext:self.deck.managedObjectContext];
+	card.frontImagePath = front;
+	card.backImagePath = back;
+	card.frontUp = [NSNumber numberWithBool:FALSE];
+	
+	[self.deck addCardsObject:card];
+	
+	// View
+	
+	
+
 }
 
 
