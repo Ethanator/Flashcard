@@ -37,16 +37,24 @@
 {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.collectionView.delegate = self;
-    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Rename"
-                                                     action:@selector(customAction:)];
-    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
-    
+    UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Rename"
+                                                       action:@selector(rename:)];
+    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem1]];
+}
+
+-(void)rename:(id)sender {
 }
 
 -(void)changeNameOfCell:(FCDeckCollectionViewCell*) cell name:(NSString *)name
 {
     [self.decks[cell.index] setName:name];
+    [self.collectionView reloadData];
+}
+
+-(void)deleteCell:(FCDeckCollectionViewCell *) cell{
+    Deck * deckToBeDeleted = self.decks[cell.index];
+    [self.decks removeObject:deckToBeDeleted];
+    [self.databaseContext deleteObject:deckToBeDeleted];
     [self.collectionView reloadData];
 }
 
@@ -56,16 +64,16 @@
 	{
 		
 		[[[UIAlertView alloc] initWithTitle:OPEN_EXTERNAL_DECK_COLLECTION_VIEW_MESSAGE
-																message:nil delegate:nil
-											cancelButtonTitle:OK_BUTTON_TITLE
-											otherButtonTitles: nil] show];
+                                    message:nil delegate:nil
+                          cancelButtonTitle:OK_BUTTON_TITLE
+                          otherButtonTitles: nil] show];
 	}
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
-																							 name:UIApplicationDidBecomeActiveNotification object:nil];
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
 	
 	//pull card decks from core data database
 	/***** REMEMBER THIS IS NOT PERFORMED IN THE MAIN THREAD. DON'T EXPECT THERE TO BE ANY DECKS READY AFTER THIS METHOD *****/
@@ -125,7 +133,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:DECK_TO_CARD_SEGUE_IDENTIFIER]) {
-			[[NSNotificationCenter defaultCenter] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
         FCCardCollectionViewController *viewController = segue.destinationViewController;
         viewController.deck = self.selectedDeck;
     }
@@ -152,7 +160,7 @@
 			
 			//turn off the activity indicator
 #warning activity indicator
-
+            
 			if (success)
 			{
 				//pull the data from the document
@@ -163,33 +171,33 @@
                                             delegate:self
                                    cancelButtonTitle:nil
                                    otherButtonTitles: nil] show];
-		    }];
+        }];
 	}
 	else
 	{
 		[databaseDocument saveToURL:databaseURL
-										forSaveOperation:UIDocumentSaveForCreating
-									 completionHandler:^(BOOL success){
-										 
-										 //turn off the activity indicator
+                   forSaveOperation:UIDocumentSaveForCreating
+                  completionHandler:^(BOOL success){
+                      
+                      //turn off the activity indicator
 #warning activity indicator
-
-         if (success)
-         {
-             //pull the data from the document
-             [self documentIsReady:databaseDocument];
-
-             //Put in a filler Deck because this is the first time the user has opened the app
-             [self firstTimeDeckInsert];
-         }
-         else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
-                                          message:nil
-                                         delegate:self
-                                cancelButtonTitle:nil
-                                otherButtonTitles: nil] show];
-         }];
+                      
+                      if (success)
+                      {
+                          //pull the data from the document
+                          [self documentIsReady:databaseDocument];
+                          
+                          //Put in a filler Deck because this is the first time the user has opened the app
+                          [self firstTimeDeckInsert];
+                      }
+                      else [[[UIAlertView alloc] initWithTitle:@"Storage Error"
+                                                       message:nil
+                                                      delegate:self
+                                             cancelButtonTitle:nil
+                                             otherButtonTitles: nil] show];
+                  }];
 	}
-
+    
 	
 }
 
@@ -202,10 +210,10 @@
 	
 	NSError * error;
 	self.decks = [[NSMutableArray alloc]init];
-
+    
     if (!DEBUG) {
-			
-			self.decks = [[self.databaseContext executeFetchRequest:request error:&error] mutableCopy];
+        
+        self.decks = [[self.databaseContext executeFetchRequest:request error:&error] mutableCopy];
         NSSortDescriptor *aSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
         [self.decks sortUsingDescriptors:[NSArray arrayWithObject:aSortDescriptor]];
     } else {
@@ -214,7 +222,7 @@
         Deck *deck2 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
                                                     inManagedObjectContext:self.databaseContext];
         Deck *deck3 = [NSEntityDescription insertNewObjectForEntityForName:DECK_ENTITY_NAME
-                        inManagedObjectContext:self.databaseContext];
+                                                    inManagedObjectContext:self.databaseContext];
         [self.decks addObject:deck1];
         [self.decks addObject:deck2];
         [self.decks addObject:deck3];
@@ -246,8 +254,8 @@
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView show];
     /*
-        */
-
+     */
+    
 }
 
 // This alert view prompts the user to type in the name of the deck to be created
@@ -271,35 +279,27 @@
 
 -(BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-    if (action == @selector(customAction:) || action == @selector(cut:)) {
+    if (action == @selector(rename:) || action == @selector(delete:)) {
         return YES;
     }
     return NO;
-}
-
--(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
-{
-    if (action == @selector(cut:))
-	{
-		int itemIndex = [indexPath indexAtPosition:1];
-		Deck * deckToBeDeleted = self.decks[itemIndex];
-        [self.decks removeObject:deckToBeDeleted];
-		[self.databaseContext deleteObject:deckToBeDeleted];
-		[self.collectionView reloadData];
-	}
 }
 
 -(BOOL)canBecomeFirstResponder {
     return YES;
 }
 
-#pragma mark - Custom Action(s)
-- (void)customAction:(id)sender {
+
+
+-(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    return;
 }
 
+#pragma mark - Custom Action(s)
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
-												layout:(UICollectionViewLayout*)collectionViewLayout
-				insetForSectionAtIndex:(NSInteger)section
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
 {
 	return UIEdgeInsetsMake(10, 10, 10, 10);
 }

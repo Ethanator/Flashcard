@@ -56,17 +56,18 @@
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIntoForeground)
 	 
-																							 name:UIApplicationDidBecomeActiveNotification object:nil];
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
 	
-	    [super viewDidLoad];
+    [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
 }
 
 -(void)appIntoForeground
 {
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS])
 	{
-//		self.resourceURL = [[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
+        //		self.resourceURL = [[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
 		NSString * string = [[NSUserDefaults standardUserDefaults] objectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];//self.resourceURL.path;
 		self.resourceURL = [NSURL fileURLWithPath:string];
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:EXTERNALLY_OPENED_URL_DEFAULTS];
@@ -90,7 +91,7 @@
 	[super viewWillAppear:animated];
 	self.navigationItem.title = self.deck.name;
 	
-
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -130,7 +131,7 @@
 	self.resourceURL = [NSURL fileURLWithPath:imagePath];
 	
 	self.imageJustCaptured = YES;
-		
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -202,15 +203,15 @@
 	// update the view
 	FCCardCollectionViewCell *viewCell = (FCCardCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
 	
-//	if ([cardToBeChanged.frontUp boolValue]) {
-//		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
-//	} else {
-//		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
-//	}
+    //	if ([cardToBeChanged.frontUp boolValue]) {
+    //		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
+    //	} else {
+    //		viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.backImagePath];
+    //	}
 	
 	[UIView transitionWithView:viewCell.cardView
 					  duration:FLIPPING_ANIMATION_DURATION
-					   options:UIViewAnimationOptionTransitionFlipFromLeft 
+					   options:UIViewAnimationOptionTransitionFlipFromLeft
 					animations:^{
 						if ([cardToBeChanged.frontUp boolValue]) {
 							viewCell.cardView.image = [UIImage imageWithContentsOfFile:cardToBeChanged.frontImagePath];
@@ -240,21 +241,21 @@
 {
 	UIImage *capturedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
 	capturedimage = [capturedimage fixOrientation];
-		
-//	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-//	
-//	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
-//	
-//	[[NSUserDefaults standardUserDefaults] synchronize];
-		
+    
+    //	NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+    //
+    //	[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
+    //
+    //	[[NSUserDefaults standardUserDefaults] synchronize];
+    
 	NSData *imageData = UIImagePNGRepresentation(capturedimage);
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
 	NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"tempImage.png"]];
-
-		NSLog((@"pre writing to file"));
+    
+    NSLog((@"pre writing to file"));
 	if (![imageData writeToFile:imagePath atomically:NO])
 	{
 		NSLog((@"Failed to cache image data to disk"));
@@ -265,11 +266,11 @@
 	}
 	
 	self.resourceURL = [NSURL URLWithString:imagePath];
-
+    
 	
 	[self performSegueWithIdentifier:CARD_TO_RENDER_SEGUE_IDENTIFIER sender:self];
 	
-//	[self.collectionView reloadData];
+    //	[self.collectionView reloadData];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -293,7 +294,7 @@
 #warning Custom Camera Protocol
 			[self performSegueWithIdentifier:SHOW_CAMERA_SEGUE sender:self];
 			
-//			[self cameraButtonTapped:self];
+            //			[self cameraButtonTapped:self];
 			break;
 			
 		case 3:
@@ -312,37 +313,37 @@
 {
 	
 	[self startCameraControllerFromViewController:self
-																	usingDelegate:self];
+                                    usingDelegate:self];
 	
-//	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-//	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//	} else {
-//		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
-//									message:nil
-//								   delegate:self
-//						  cancelButtonTitle:@"OK"
-//						  otherButtonTitles:nil] show];
-//		return;
-//	}
-//	picker.delegate = self;
-//	[self presentViewController:picker animated:YES completion:nil];
+    //	UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    //	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    //		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //	} else {
+    //		[[[UIAlertView alloc] initWithTitle:@"No Camera Available"
+    //									message:nil
+    //								   delegate:self
+    //						  cancelButtonTitle:@"OK"
+    //						  otherButtonTitles:nil] show];
+    //		return;
+    //	}
+    //	picker.delegate = self;
+    //	[self presentViewController:picker animated:YES completion:nil];
 }
 
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
-																	 usingDelegate: (id <UIImagePickerControllerDelegate,
-																									 UINavigationControllerDelegate>) delegate {
+                                   usingDelegate: (id <UIImagePickerControllerDelegate,
+                                                   UINavigationControllerDelegate>) delegate {
 	
 	if (([UIImagePickerController isSourceTypeAvailable:
-				UIImagePickerControllerSourceTypeCamera] == NO)
-			|| (delegate == nil)
-			|| (controller == nil))
+          UIImagePickerControllerSourceTypeCamera] == NO)
+        || (delegate == nil)
+        || (controller == nil))
 		return NO;
 	
 	
 	UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
 	cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-		
+    
 	// Hides the controls for moving & scaling pictures, or for
 	// trimming movies. To instead show the controls, use YES.
 	cameraUI.allowsEditing = NO;
@@ -368,10 +369,10 @@
 // method to handle web case
 - (void)promptURL {
 	UIAlertView *promptForURLView = [[UIAlertView alloc] initWithTitle:PROMPT_FOR_URL_TITLE
-																message:PROMPT_FOR_URL_MESSAGE
-															   delegate:self
-													  cancelButtonTitle:PROMPT_FOR_URL_CANCEL_BUTTON_TITLE
-													  otherButtonTitles:PROMPT_FOR_URL_OTHER_BUTTON_TITLES];
+                                                               message:PROMPT_FOR_URL_MESSAGE
+                                                              delegate:self
+                                                     cancelButtonTitle:PROMPT_FOR_URL_CANCEL_BUTTON_TITLE
+                                                     otherButtonTitles:PROMPT_FOR_URL_OTHER_BUTTON_TITLES];
 	promptForURLView.alertViewStyle = UIAlertViewStylePlainTextInput;
 	[promptForURLView show];
 }
@@ -401,9 +402,9 @@
 		} else if (buttonIndex == 1) {
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
-						
+            
 			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { min-height: 100%;} p { margin: 0 auto;font-size: 10em; test-align: center; vertical-align: middle; word-wrap: break-word; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
-						
+            
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			
 			[[NSUserDefaults standardUserDefaults] setInteger:(cardUniqueIDCounter + 1) forKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
@@ -491,9 +492,9 @@
 							NSLog(@"Back image path:%@", cardToBeChanged.backImagePath);
 						}
 					} completion:NULL];
-
+    
 	
-
+    
 }
 
 // methods to set the appearance
@@ -517,6 +518,15 @@
     return NO;
 }
 
+-(void)deleteCell:(FCCardCollectionViewCell *) cell{
+    NSMutableSet *tmpSet = [self.deck.cards mutableCopy];
+    [tmpSet removeObject:cell];
+    self.deck.cards = tmpSet;
+    
+    // Ethan's Leftovers
+    [self.collectionView reloadData];
+}
+
 -(void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(cut:))
@@ -528,7 +538,7 @@
             BOOL r = ([cardInDeck.index integerValue] == itemIndex);
             return r;
         }] anyObject];
-
+        
         NSMutableSet *tmpSet = [self.deck.cards mutableCopy];
         [tmpSet removeObject:cardToBeDeleted];
         self.deck.cards = tmpSet;

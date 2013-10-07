@@ -23,15 +23,15 @@
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
-- (void)customAction:(id)sender {
+- (void)rename:(id)sender {
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:ALERT_VIEW_RENAME_FILE
                                                         message:ALERT_VIEW_MESSAGE
@@ -40,7 +40,11 @@
                                               otherButtonTitles:ALERT_VIEW_OTHER_BUTTON];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView show];
+    
+}
 
+- (void)delete:(id)sender {
+    [(FCDeckCollectionViewController*)[(UICollectionView*)self.superview delegate] deleteCell:self];
 }
 
 // This alert view prompts the user to type in the name of the deck to be created

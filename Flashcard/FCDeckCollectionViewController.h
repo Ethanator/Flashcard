@@ -14,5 +14,5 @@
 @interface FCDeckCollectionViewController : UICollectionViewController <LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout>
 
 -(void)changeNameOfCell:(FCDeckCollectionViewCell*) cell name:(NSString *)name;
-
+-(void)deleteCell:(FCDeckCollectionViewCell*) cell;
 @end

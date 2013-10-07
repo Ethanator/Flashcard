@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Deck.h"
+#import "FCCardCollectionViewCell.h"
 
 @interface FCCardCollectionViewController : UICollectionViewController
 
+-(void)deleteCell:(FCCardCollectionViewCell*) cell;
 @property (strong, nonatomic) Deck *deck;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
