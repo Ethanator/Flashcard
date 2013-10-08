@@ -403,7 +403,7 @@
 			
 			NSString * stringToRender = [alertView textFieldAtIndex:0].text;
             
-			NSString *html = [NSString stringWithFormat:@"<html><head><style> div { min-height: 100%;} p { margin: 0 auto;font-size: 10em; test-align: center; vertical-align: middle; word-wrap: break-word; font-family: \"Georgia\", serif; }</style></head> <body><div><p>%@</p></div></body></html>", stringToRender];
+			NSString *html = [NSString stringWithFormat:@"<html><head><style>div{margin-top:400px;}p{word-wrap: break-word;font-family:\"Georgia\",serif;text-align:center;font-size:2em;}</style></head><body><div><p>%@</p></div></body></html>", stringToRender];
             
 			NSInteger cardUniqueIDCounter = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_IMAGE_COUNTER_IN_NSUSERDEFAULTS];
 			

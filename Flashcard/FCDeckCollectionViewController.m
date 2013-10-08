@@ -253,9 +253,6 @@
                                               otherButtonTitles:ALERT_VIEW_OTHER_BUTTON];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView show];
-    /*
-     */
-    
 }
 
 // This alert view prompts the user to type in the name of the deck to be created
