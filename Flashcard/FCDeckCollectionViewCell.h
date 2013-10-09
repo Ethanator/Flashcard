@@ -11,8 +11,6 @@
 @class FCDeckCollectionViewCell; // Forward declare Custom Cell for the property
 
 @protocol MyMenuDelegate <NSObject>
-@optional
-- (void)customAction:(id)sender forCell:(FCDeckCollectionViewCell *)cell;
 @end
 
 @interface FCDeckCollectionViewCell : UICollectionViewCell
