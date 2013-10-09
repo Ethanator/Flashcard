@@ -503,6 +503,16 @@
 {
 	return UIEdgeInsetsMake(10, 10, 10, 10);
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	NSError * error;
+	[self.deck.managedObjectContext save:&error];
+	if (error)
+	{
+		NSLog(@"error saving document: %@", error);
+	}
+}
 
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {

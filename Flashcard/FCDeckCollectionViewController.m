@@ -75,6 +75,17 @@
 	[super viewDidAppear:animated];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	NSError * error;
+	[self.databaseContext save:&error];
+	if (error)
+	{
+		NSLog(@"error saving document: %@", error);
+	}
+}
+
 -(void)viewDidLayoutSubviews
 {
 	[super viewDidLayoutSubviews];
