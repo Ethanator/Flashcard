@@ -223,7 +223,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SqH-eR-dhb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -231,8 +231,8 @@
                                 <rect key="frame" x="141" y="222" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hru-97-7YT">
-                                <rect key="frame" x="215" y="420" width="85" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hru-97-7YT">
+                                <rect key="frame" x="341" y="492" width="85" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Capture">
@@ -242,8 +242,8 @@
                                     <action selector="captureButtonTapped:" destination="l3K-rN-mbG" eventType="touchUpInside" id="aNv-MI-6im"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMV-7l-dHo">
-                                <rect key="frame" x="20" y="420" width="74" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMV-7l-dHo">
+                                <rect key="frame" x="347" y="492" width="74" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Cancel">
@@ -255,6 +255,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OMV-7l-dHo" firstAttribute="leading" secondItem="5oc-CO-3Ow" secondAttribute="leading" constant="20" symbolic="YES" id="5HI-sG-C2I"/>
+                            <constraint firstAttribute="trailing" secondItem="hru-97-7YT" secondAttribute="trailing" constant="20" symbolic="YES" id="8ES-Yq-Wbp"/>
+                            <constraint firstItem="bAv-C5-5EL" firstAttribute="top" secondItem="OMV-7l-dHo" secondAttribute="bottom" constant="20" symbolic="YES" id="QK2-Sf-cKP"/>
+                            <constraint firstItem="bAv-C5-5EL" firstAttribute="top" secondItem="hru-97-7YT" secondAttribute="bottom" constant="20" symbolic="YES" id="grR-Q4-qEK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DLf-Q2-NSC"/>
                     <connections>

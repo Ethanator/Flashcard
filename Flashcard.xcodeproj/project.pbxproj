@@ -176,7 +176,7 @@
 				2C54846817FFA0BE00F13C12 /* FCAppDelegate.m */,
 				2C54846A17FFA0BE00F13C12 /* Main.storyboard */,
 				2C54847017FFA0BE00F13C12 /* Images.xcassets */,
-				2C54849F17FFB23100F13C12 /* Data */,
+				2C54849F17FFB23100F13C12 /* Core Data */,
 				2C54845F17FFA0BE00F13C12 /* Supporting Files */,
 			);
 			path = Flashcard;
@@ -211,7 +211,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2C54849F17FFB23100F13C12 /* Data */ = {
+		2C54849F17FFB23100F13C12 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
 				2C54849617FFAEAD00F13C12 /* Flashcard.xcdatamodeld */,
@@ -222,7 +222,7 @@
 				3F7AEFB818004E44002D6D9A /* LXReorderableCollectionViewFlowLayout.h */,
 				3F7AEFB918004E6B002D6D9A /* LXReorderableCollectionViewFlowLayout.m */,
 			);
-			name = Data;
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 		2C5484A017FFB23F00F13C12 /* View Controller Subclasses */ = {
